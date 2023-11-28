@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merida Login</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+<style>
+    .form-container{
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+.form-container .form-horizontal{
+    background-color: white;
+    /* background: linear-gradient(to right,white,transparent,transparent,transparent,white); */
+    padding: 48px 40px 36px 40px;
+    border-radius: 5px;
+    border: 1px solid #e7e7e7;
+    height: 500px;
+    width: 450px;
+}
+.form-container .title{
+    color: #202124;
+    font-size: 24px;
+    line-height: 20.0004px;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 2px;
+    margin-bottom: 40px;
+    font-family:'Google Sans','Noto Sans Myanmar UI', Arial,sans-serif;
+}
+
+.form-horizontal .form-floating{
+    background-color:white;
+    margin-top: 30px;
+    height: 60px;
+    border-radius: 3px;
+}
+
+.form-horizontal .signin{
+    color: #fff;
+    background-color: #1A73E8;
+    font-size: 15px;
+    font-weight: 600;
+    height: 40px;
+    width: 85px;
+    border: none;
+    border-radius: 4px;
+}
+.form-horizontal .forgot-pass{
+    margin-top: 50px;
+}
+.form-horizontal .forgot-pass a{
+    color: #1A73E8;
+    letter-spacing: 0.25px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+.form-horizontal .forgot-pass a:hover{
+    color: #555;
+    text-decoration: underline;
+}
+
+.heading{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.heading img{
+    height: 40px;
+}
+
+
+</style>
+</head>
+<body>
+    <div class="container-fluid login_page_container pt-4" style="height: 100vh;">
+        <div class="form-container">
+            <form class="form-horizontal" action="" method="POST">
+                {% csrf_token %}
+
+              <div class="heading">
+                <img src="{% static 'images/merida_image.jpg' %}" alt="MERIDA">
+              </div>
+                <h3 class="title">Login</h3>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="username" placeholder="name@example.com" name="Username">
+                    <label for="floatingInput">Username</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="Password">
+                    <label for="floatingPassword">Password</label>
+                  </div>
+                  {% if messages %}
+    
+      {% for message in messages %}
+        
+      <p style="color: rgba(244, 110, 110, 0.972);"><i class="mdi mdi-alert-circle"></i>{{ message }}</p> 
+        
+      {% endfor %}
+    
+  {% endif %}
+                <div class="row">
+                    <div class="col-6 forgot-pass text-start d-flex align-items-center"><a href="#">Forgot password?</a></div>
+                    <div class="col-6 forgot-pass text-end"><button class="btn signin" >Log In</button></div>
+                </div>
+            </form>
+</div>
+    </div>
+</body>
+</html>

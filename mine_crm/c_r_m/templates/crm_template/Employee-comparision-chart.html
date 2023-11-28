@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="employeeChart" width="400px" height="200px"></canvas>
+
+    <script>
+        var ctx = document.getElementById('employeeChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels:["Naveen", "Vivek", "Pranav"],
+                 datasets: [
+              {
+                label: "New Leads",
+                borderColor:  'rgba(255, 99, 132, 0.2)',
+                backgroundColor:  'rgba(255, 99, 132, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [20, 40, 15, 35, 25]
+              },
+              {
+                label: "Followup Leads",
+                borderColor: 'rgba(54, 162, 235, 0.2)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [40, 30, 20, 10, 50]
+              },
+              {
+                label: "Prospects",
+                borderColor: 'rgba(255, 206, 86, 0.2)',
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [70, 10, 30, 40, 25]
+              },
+              {
+                label: "Registered",
+                borderColor: 'rgba(75, 192, 192, 0.2)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [70, 10, 30, 40, 25]
+              },
+              {
+                label: "Closed",
+                borderColor: 'rgba(255, 159, 64, 0.2)',
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [60, 20, 30, 40, 35]
+              },
+
+          ]
+            },
+            options: {
+            maintainAspectRatio: false,
+            responsive: false,
+            width: 300,
+            height: 100,
+            }
+        });
+    </script>
+</body>
+</html>

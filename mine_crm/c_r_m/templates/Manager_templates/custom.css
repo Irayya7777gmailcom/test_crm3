@@ -1,0 +1,82 @@
+#cheque-payment{
+    display: none;
+  }
+#upi-payment{
+  display: none;
+}
+#DD-payment{
+  display: none;
+}
+#Bank-transfer{
+  display: none;
+}
+#cash-payment{
+  display: none;
+}
+#cash-table tbody input{
+  border: none;
+  border-bottom: 1px solid lightgray;
+  outline: none;
+  width: 80px;
+}
+
+h6{
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+.custom-btn{
+  background: none;
+  border: none;
+  margin-bottom: 5px;
+}
+
+#hiddenDiv{
+  display: none;
+}
+.custom-btn:hover{
+  font-weight: 600;
+}
+.clickable-div-btn{
+  background: none;
+  border: none;
+}
+#subhiddendiv{
+  max-height: 450px;
+  overflow-y: auto;
+}
+#custom-date-dropdown{
+    text-align: center;
+}
+#from-date-btn{
+  border: none;
+  background: none;
+}
+#to-date-btn{
+  border: none;
+  background: none;
+}
+#from-date{
+  width: 110px;
+}
+#to-date{
+  width: 110px;
+  margin-left: 20px;
+}
+#clientleads-btn{
+  background-color: lightgray;
+  color: black;
+  padding: 5px;
+}
+.upload-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#uploadButton {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

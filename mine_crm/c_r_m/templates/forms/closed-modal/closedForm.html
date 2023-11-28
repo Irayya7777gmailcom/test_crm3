@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closed Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="modal" id="closedModal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Closed Registration Form</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <form class="row g-3 bg-light" style="border: 1px solid lightgray;">
+                            <div class="col-md-6">
+                                <input type="number" id="lead_id" name="lead_id" class="form-control" hidden>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="assigned-to" name="assigned-to" class="form-control" hidden>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" id="closure-stage" name="closure-stage" class="form-control">
+                                <label for="closure-stage">Stage of Closure</label>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea class="form-control" placeholder="History" id="history" name="history" style="height: 100px"></textarea>
+                            <label for="summary">History</label>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea class="form-control" placeholder="Reason for Closure" id="reason" name="reason" style="height: 100px"></textarea>
+                        <label for="reason-for-closure">Reason for Closure</label>
+                            </div>
+                            <div class="col-12">
+                                <label>Opportunities in future</label>
+                    <input type="radio" name="opportunities_in_future" id="opportunities_in_future_yes" value="yes">
+                    <label for="opportunities_in_future_yes">Yes</label>
+                    <input type="radio" name="opportunities_in_future" id="opportunities_in_future_no" value="no">
+                    <label for="opportunities_in_future_no">No</label>
+                            </div>
+                            
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="modal-close-btn">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+</body>
+</html>

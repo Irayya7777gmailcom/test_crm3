@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Document</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"> -->
+    
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" > -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="{% static 'css/Filter.css' %}" rel="stylesheet">
+<script src="{% static 'js/Filter.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- Nav bar -->
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+              <a class="navbar-brand brand-logo" href=""><img src="{% static 'assets/images/merida_tech_minds_opc_pvt_ltd_cover-removebg-preview.png' %}" alt="logo" style="height: 60px;width: 200px;"/></a>
+              <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'assets/images/logo-mini.svg' %}" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <!-- Search Criteria -->
+            <div class="row ms-2 ">
+              <div class="col-xl-12 col-sm-4">
+                <div class="row p-2 mt-2">
+                  <div class="col-12 p-2 rounded d-none d-lg-block" id="clickableDiv" style="border: 1px solid lightgray;height: 40px;color: black;width: 550px;">
+                  <i class="mdi mdi-magnify" style="font-size: 18px;" onclick="send()"></i>
+                  </div>
+                 </div>
+
+                 <div id="hiddenDiv">
+                  <div class="row justify-content-end"  style="background-color: white; color: black;border: 1px solid lightgray; border-bottom: none;">
+                    <button class="d-flex justify-content-center" style="width: 60px;border: none;" id="close-btn">Close</button>
+                   </div>
+  
+                   <div class="row p-0" id="subhiddendiv" style="background-color: white;border: 1px solid lightgray;">
+                        <div  class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Leads</h5>
+                          <button class="custom-btn" data-searchfield="lead Name" id="lead">lead Name</button>
+                          <button class="custom-btn" data-searchfield="Contact Number">Contact Number</button>
+                          <button class="custom-btn" data-searchfield="New Leads">New Leads</button>
+                          <button class="custom-btn" data-searchfield="Followup">Followup</button>
+                          <button class="custom-btn" data-searchfield="Prospects">Prospects</button>
+                          <button class="custom-btn" data-searchfield="Closed">Closed</button>
+                        </div>
+                        <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Course</h5>
+                            <button class="custom-btn" data-searchfield="Python Full Stack">Python Full Stack</button>
+                            <button class="custom-btn" data-searchfield="Data Science">Data Science</button>
+                            <button class="custom-btn" data-searchfield="Marketing">Marketing</button>
+                            <button class="custom-btn" data-searchfield="Spoken English">Spoken English</button>
+                          </div>
+                        <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Source</h5>
+                            <button class="custom-btn" data-searchfield="Naukri">Naukri</button>
+                          <button class="custom-btn" data-searchfield="Mail">Mail</button>
+                          <button class="custom-btn" data-searchfield="Whatsapp">Whatsapp</button>
+                          <button class="custom-btn" data-searchfield="Foundit">Foundit</button>
+                          <button class="custom-btn" data-searchfield="Indeed">Indeed</button>
+                          <button class="custom-btn" data-searchfield="Just Dial">Just Dial</button>
+                    </div>
+                    <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                      <h5 class="text-center">Employee</h5>
+                        <button class="custom-btn" data-searchfield="Pranav">Pranav</button>
+                        <button class="custom-btn" data-searchfield="Vivek">Vivek</button>
+                        <button class="custom-btn" data-searchfield="Naveen">Naveen</button>
+                </div>
+                <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                  <h5 class="text-center">Time</h5>
+                  <button class="custom-btn" data-searchfield="time">time</button>
+                  <button class="custom-btn" data-searchfield="today">today</button>
+
+                  <div class="dropdown" id="custom-date-div">
+                    <button class="custom-btn" data-bs-toggle="dropdown" aria-expanded="false" data-searchfield="Custom Date">
+                      Custom Date
+                    </button>
+                    <ul class="dropdown-menu" id="custom-date-dropdown">
+                      <li><button id="from-date-btn" onclick="addFromDate()">From</button><input type="date" id="from-date"></li>
+                      <li><button id="to-date-btn" onclick="addToDate()">To</button><input type="date" id="to-date"></li>
+                    </ul>
+                  </div>
+            </div>
+            <div class="col-xl-2 col-md-6 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+              <h5 class="text-center">Degree</h5>
+              <button class="custom-btn" data-searchfield="Qualification">Quaification</button>
+              <button class="custom-btn" data-searchfield="Percentage">Percentage</button>
+        </div>
+      </div>
+    </div>
+              </div>
+        </div>
+           <!-- Search criteria end -->
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item nav-profile dropdown d-none d-lg-block">
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="nav-profile-img">
+                    <img src="{% static 'assets/images/user.png' %}" alt="image">
+                    <!-- <span class="availability-status online"></span> -->
+                  </div>
+                </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="mdi mdi-bell-outline"></i>
+                    <span class="count-symbol"></span>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-lg-block full-screen-link">
+                  <a class="nav-link">
+                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                  </a>
+                </li>
+                <!-- <li class="nav-item dropdown d-none d-lg-block">
+                  <a class="nav-link dropdown-toggle" id="createRecordDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-plus"></i>
+                  </a>
+                  <div class="dropdown-menu navbar-dropdown" aria-labelledby="createRecordDropdown">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#clientModal" style="cursor: pointer;">
+                      <i class="fa-solid fa-plus me-1 text-info" style="font-size: 14px;"></i>Client
+                  </a>
+                  <a class="nav-link" data-bs-toggle="modal" data-bs-target="#customerModal" style="cursor: pointer;">
+                    <i class="fa-solid fa-plus me-1 text-info" style="font-size: 14px;"></i>Customer
+                </a>
+                <a class="nav-link" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#excelUploadModal">
+                  <i class="fa-solid fa-plus me-1 text-info" style="font-size: 14px;"></i>Upload Excel
+              </a>
+                  </div>
+                </li> -->
+              <li class="nav-item d-none d-lg-block">
+                  <a class="nav-link" style="cursor: pointer;">
+                      <i class="mdi mdi-database" id="database-button"></i>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                  <a class="nav-link" style="cursor: pointer;">
+                      <i class="mdi mdi-calendar" id="calendar-button"></i>
+                  </a>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- Navbar end -->
+
+        <!-- Content -->
+        <div class="container-fluid page-body-wrapper px-0">
+        <!-- dashboard side bar -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="{% static 'assets/images/user.png' %}" alt="profile">
+                  <span class="login-status online"></span>
+                  <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">{{user}}</span>
+                  <span class="text-secondary text-small">{{designation}}</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Leads</span>
+                <i class="mdi mdi-account menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="{% url 'manager-page-clientleads' %}">Client</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'manager-page-customerleads' %}">Customer</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <span class="menu-title">Employees</span>
+                <i class="mdi mdi-account-multiple menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'manager-activities' %}">
+                <span class="menu-title">Activities</span>
+                <i class="mdi mdi-marker-check menu-icon"></i>
+              </a>
+              
+            </li>
+            
+          </ul>
+        </nav>
+        <!-- Dashboard side bar end -->
+
+        <!-- Content table start -->
+        <div class="main-panel" style="width: 100%;">
+            <div class="content-wrapper">
+                <div class="row m-2 mt-4">
+                    <div class="col-sm-12 col-lg-12 justify-content-between">
+                        <div class="row justify-content-center text-center">
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(54, 215, 232, 1);width: 150px;">
+                            <h6>New Leads</h6>
+                            <h6>{{new_leads_count}}</h6></div>
+                            <!-- <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgb(28, 96, 103);width: 150px;">
+                              <h6>Customer Leads</h6>
+                              <h6>{{customer_leads_count}}</h6></div> -->
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(6, 185, 157, 1);width: 150px;">
+                            <h6>Followup Leads</h6>
+                            <h6>{{followup_count}}</h6></div>
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(255, 191, 150, 1);width: 150px;">
+                                <h6>Prospects</h6>
+                                <h6>{{prospect_count}}</h6>
+                            </div>
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(218, 140, 255, 1);width: 150px;">
+                                <h6>Registered</h6>
+                                <h6>{{registered_count}}</h6></div>
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(255, 165, 0, 1);width: 150px;">
+                                <h6>Closed</h6>
+                                <h6>{{closed_count}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-7 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <h4 class="card-title float-left">Leads Chart by Course</h4>
+                          <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                        </div>
+
+                        <canvas id="sourseChart" width="600px" height="300px"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-5 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Leads Chart</h4>
+
+                         <canvas id="barChart" width="400px" height="350px"></canvas> 
+                        
+                        <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <h4 class="card-title float-left">Employee Comparision Chart</h4>
+                          <div id="Employee-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                        </div>
+                        <canvas id="employeeChart" width="600px" height="400px"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4>Leads Chart by Source</h4>
+                        
+                        <canvas id="courseChart" width="600" height="400"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial -->
+          </div>
+        </div>
+
+<!-- Client Modal start -->
+<div class="modal" id="clientModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Client Registration Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-xl-8 ">
+
+            
+              <form class="row g-3 bg-light" style="border: 1px solid lightgray;" action="{% url 'add-client-record' %}" method="POST">
+
+                {% csrf_token %}
+                  <div class="col-md-4">
+                      <input type="text" id="lead_id" name="lead_id" class="form-control" hidden>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="lead_name" name="lead_name" class="form-control">
+                  <label for="lead_name">Name</label>
+                  </div>
+                  <div class="col-4">
+                      <input type="number" id="contact_number" name="contact_number" class="form-control" pattern="[0-9]{10}">
+                      <label for="contact_number">Contact Number</label>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="door_number" name="door_number" class="form-control">
+                      <label for="door_number">Door Number</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="street_name" name="street_name" class="form-control">
+                      <label for="street_name">Street Name</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="area" name="area" class="form-control">
+                    <label for="area">Area</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="city" name="city" class="form-select">
+                          <option selected>Select a City</option>
+                          </Select>
+                          <label for="city">City</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="state" name="state" class="form-select">
+                          <option selected>Select a State</option>
+                          </Select>
+                          <label for="state">State</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="number" id="pincode" name="pincode" class="form-control" pattern="[0-9]{6}">
+                      <label for="pincode">Pinode</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="date" id="dob" name="dob" class="form-control">
+                  <label for="dob">Date of Birth</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="email" id="email" name="email" class="form-control">
+                  <label for="email">Email</label>
+                    </div>
+                    <div class="col-5">
+                      <select id="gender" name="gender" class="form-select">
+                          <option selected>Select your Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Trans">Trans</option>
+                          </Select>
+                          <label for="gender">Gender</label>
+                    </div>
+                  
+                    <div class="col-md-4">
+                      <input type="text" id="company_name" name="company_name" class="form-control">
+    <label for="company_name">Company Name</label>
+                  </div>
+                  <div class="col-4">
+                      <input type="number" id="company_contact_number" name="company_contact_number" class="form-control" pattern="[0-9]{10}">
+                      <label for="company_contact_number">Company Contact Number</label>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="company_door_number" name="company_door_number" class="form-control">
+                      <label for="company_door_number">Company Door Number</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="company_street_name" name="company_street_name" class="form-control">
+                      <label for="company_street_name">Company Street Name</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="company_area" name="company_area" class="form-control">
+                 <label for="company_area">Area</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="company_city" name="company_city" class="form-select">
+                          <option selected>Select a City</option>
+                          </Select>
+                          <label for="company_city">City</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="company_" name="company_state" class="form-select">
+                          <option selected>Select a State</option>
+                          </Select>
+                          <label for="company_state">State</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="company_pincode" name="company_pincode" class="form-control" pattern="[0-9]{6}">
+                      <label for="company_pincode">Pinode</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="company_gstnumber" name="company_gstnumber" class="form-control">
+                      <label for="company_gstnumber">GST Number</label>
+                    </div>
+                    <div class="col-md-5">
+                      <input type="text" id="company_field" name="company_field" class="form-control">
+                      <label for="company_field">Company Field</label>
+                    </div>
+                    <div class="col-5">
+                      <input type="text" id="comapny_website" name="comapny_website" class="form-control">
+                 <label for="comapny_website">Company Website</label>
+                    </div>
+
+                  <div class="col-md-4">
+                      <select id="master_degree" name="master_degree" class="form-select">
+                          <option selected>Select your Degree</option>
+                          <option value="Msc">Msc</option>
+                          <option value="ME">ME</option>
+                          <option value="MBA">MBA</option>
+                          <option value="MCA">MCA</option>
+                          <option value="M-Tech">M-Tech</option>
+                          <option value="MS">MS</option>
+                          <option value="MCom">MCom</option>
+                          </Select>
+                          <label for="master_degree">Master Degree</label>
+                    </div>
+                  <div class="col-md-5">
+                      <input type="text" id="master_specification" name="master_specification" class="form-control">
+                  <label for="master_specification">Master Specification</label>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="number" id="master_percentage" name="master_percentage" class="form-control">
+                      <label for="master_percentage">Percentage Achieved</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="bachelor_degree" name="bachelor_degree" class="form-select">
+                          <option selected>Select your Degree</option>
+                          <option value="Bsc">Bsc</option>
+                          <option value="BE">BE</option>
+                          <option value="BBA">BBA</option>
+                          <option value="BCA">BCA</option>
+                          <option value="B-Tech">B-Tech</option>
+                          <option value="BCom">BCom</option>
+                          </Select>
+                          <label for="bachelor_degree">Bachelor Degree</label>
+                    </div>
+                  <div class="col-md-5">
+                      <input type="text" id="bachelor_specification" name="bachelor_specification" class="form-control">
+                  <label for="bachelor_specification">Bachelor Specification</label>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="number" id="bachelor_percentage" name="bachelor_percentage" class="form-control">
+                      <label for="bachelor_percentage">Percentage Achieved</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="course_enquired" name="course_enquired" class="form-control">
+                      <label for="course_enquired">Course Enquired</label>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="enquiry_location" name="enquiry_location" class="form-control">
+                      <label for="enquiry_location">Enquiry location</label>
+                  </div>
+                  <div class="col-4">
+                      <input type="text" id="source" name="source" class="form-control">
+                      <label for="source">Source</label>
+                  </div>
+                  <div>
+                  <div class="col-md-6">
+                    <input type="text" name="technologies_known" id="customer_technologies_known" class="form-control">
+                      <label for="technologies_known" class="form-label">Technologies Known</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="lead-reg-level-of-lead" class="form-select" name="level_of_lead">
+                        <option selected>Choose...</option>
+                        <option>Fresher</option>
+                        <option>Employee</option>
+                        <option>Student</option>
+                      </select>
+                      <label for="level-of-lead" class="form-label">Level of Lead</label>
+                    </div>
+                    <div class="col-md-12" id="employee_level">
+                      <div class="row">
+                        <div class="col-md-6">
+                           <input type="text" class="form-control" id="designation" name="designation">
+                          <label for="designation" class="form-label">Designation</label></div>
+                          <div class="col-md-6"> 
+                            <input type="number" class="form-control" id="salary" name="salary">
+                            <label for="salary" class="form-label">Salary</label></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Register" ></button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </form>
+          </div>
+          
+      </div>
+      
+
+    </div>
+  </div>
+</div>
+<!-- Client modal end -->
+
+<!-- Customer modal start -->
+<div class="modal" id="customerModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Customer Registration Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-xl-8 ">
+              <form class="row g-3 bg-light" style="border: 1px solid lightgray;" action="{% url 'add-customer-record' %}" method="POST">
+                {% csrf_token %}
+
+                <input type="text" name="created_by" value="{{user}}" hidden>
+                  <div class="col-md-4">
+                      <input type="text" id="lead_id" name="lead_id" class="form-control" hidden>
+                      <!-- <label for="lead_id">Lead Id</label> -->
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="lead_name" name="lead_name" class="form-control">
+                  <label for="lead_name">Name</label>
+                  </div>
+                  <div class="col-4">
+                      <input type="text" id="contact_number" name="contact_number" class="form-control" pattern="[0-9]{10}">
+                      <label for="contact_number">Contact Number</label>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="door_number" name="door_number" class="form-control">
+                      <label for="door_number">Door Number</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="street_name" name="street_name" class="form-control">
+                      <label for="street_name">Street Name</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="area" name="area" class="form-control">
+                     <label for="area">Area</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="city" name="city" class="form-select">
+                          <option selected>Select a City</option>
+                          </Select>
+                          <label for="city">City</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="state" name="state" class="form-select">
+                          <option selected>Select a State</option>
+                          </Select>
+                          <label for="state">State</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="pincode" name="pincode" class="form-control" pattern="[0-9]{6}">
+                      <label for="pincode">Pinode</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="date" id="dob" name="dob" class="form-control">
+                     <label for="dob">Date of Birth</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="email" id="email" name="email" class="form-control">
+                     <label for="email">Email</label>
+                    </div>
+                    <div class="col-4">
+                      <select id="gender" name="gender" class="form-select">
+                          <option selected>Select your Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Two-Spirit">Two-Spirit</option>
+                          </Select>
+                          <label for="gender">Gender</label>
+                    </div>
+                  <div class="col-md-4">
+                      <select id="master_degree" name="master_degree" class="form-select">
+                          <option selected>Select your Degree</option>
+                          <option value="Msc">Msc</option>
+                          <option value="ME">ME</option>
+                          <option value="MBA">MBA</option>
+                          <option value="MCA">MCA</option>
+                          <option value="M-Tech">M-Tech</option>
+                          <option value="MS">MS</option>
+                          <option value="MCom">MCom</option>
+                          </Select>
+                          <label for="master_degree">Master Degree</label>
+                    </div>
+                  <div class="col-md-5">
+                      <input type="text" id="master_specification" name="master_specification" class="form-control">
+                  <label for="master_specification">Master Specification</label>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="text" id="master_percentage" name="master_percentage" class="form-control">
+                      <label for="master_percentage">Percentage Achieved</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="bachelor_degree" name="bachelor_degree" class="form-select">
+                          <option selected>Select your Degree</option>
+                          <option value="Bsc">Bsc</option>
+                          <option value="BE">BE</option>
+                          <option value="BBA">BBA</option>
+                          <option value="BCA">BCA</option>
+                          <option value="B-Tech">B-Tech</option>
+                          <option value="BCom">BCom</option>
+                          </Select>
+                          <label for="bachelor_degree">Bachelor Degree</label>
+                    </div>
+                  <div class="col-md-5">
+                      <input type="text" id="bachelor_specification" name="bachelor_specification" class="form-control">
+                     <label for="bachelor_specification">Bachelor Specification</label>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="text" id="bachelor_percentage" name="bachelor_percentage" class="form-control">
+                      <label for="bachelor_percentage">Percentage Achieved</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="course_enquired" name="course_enquired" class="form-control">
+                      <label for="course_enquired">Course Enquired</label>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="enquiry_location" name="enquiry_location" class="form-control">
+                      <label for="enquiry_location">Enquiry location</label>
+                  </div>
+                  <div class="col-4">
+                      <input type="text" id="source" name="source" class="form-control">
+                      <label for="source">Source</label>
+                  </div>
+                  <div>
+                  <div class="col-md-6">
+                    <input type="text" name="technologies_known" id="customer_technologies_known" class="form-control">
+                      <label for="technologies_known" class="form-label">Technologies Known</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="lead-reg-level-of-lead" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>Fresher</option>
+                        <option>Employee</option>
+                        <option>Student</option>
+                      </select>
+                      <label for="level-of-lead" class="form-label">Level of Lead</label>
+                    </div>
+                    <div class="col-md-12" id="employee_level">
+                      <div class="row">
+                        <div class="col-md-6"> <input type="text" class="form-control" id="designation">
+                          <label for="designation" class="form-label">Designation</label></div>
+                          <div class="col-md-6"> <input type="text" class="form-control" id="salary">
+                            <label for="salary" class="form-label">Salary</label></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Register" ></button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                  </div>
+                </form>
+          </div>
+          
+      </div>
+      
+
+    </div>
+  </div>
+</div>
+<!-- Customer modal end -->
+
+<!-- Mark as Register modal start -->
+<div class="modal" id="markAsRegisterModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Mark as Register Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-xl-8 ">
+              <form class="row g-3 bg-light" style="border: 1px solid lightgray;">
+                <div class="col-md-4">
+                  <input type="text" class="form-control">
+                  <Label>Lead Id</Label>
+                </div>
+                  <div class="col-md-4">
+                      <select id="course" name="course" class="form-select">
+                          <option selected>Select a Course</option>
+                          <option>Python</option>
+                          <option>Java</option>
+                          <option >Web Designing</option>
+                          </Select>
+                          <label for="course">Course</label>
+                  </div>
+                  <div class="col-md-4">
+                      <select id="batch_type" name="batch_type" class="form-select">
+                          <option selected>select...</option>
+                          <option value="">Weekdays</option>
+                          <option value="">Weekend</option>
+                          </Select>
+                          <label for="batch_type">Batch Type</label>
+                  </div>
+                  <div class="col-md-6">
+                      <input type="time" id="start_time" name="start_time" class="form-control">
+          <label for="start_time">Start Time</label>
+                  </div>
+                  <div class="col-md-6">
+                      <input type="time" id="end_time" name="end_time" class="form-control">
+          <label for="end_time">End Time</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="course_duration" name="course_duration" class="form-control">
+                      <label for="course_duration">Course Duration</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="date" id="tentative_start_date" name="tentative_start_date" class="form-control">
+          <label for="tentative_start_date">Tentative Start Date</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="date" id="tentative_end_date" name="tentative_end_date" class="form-control">
+          <label for="tentative_end_date">Tentative End Date</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="installments" name="installments" class="form-control">
+                      <label for="installments">Installments</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="date" id="due_date" name="due_date" class="form-control">
+          <label for="due_date">Due Date</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="due_amount" name="due_amount" class="form-control">
+          <label for="due_amount">Due Amount</label>
+                    </div>
+                    <div class="col-md-5">
+                      <input type="text" id="trainer_name" name="trainer_name" class="form-control">
+                      <label for="trainer_name">Trainer Name</label>
+                    </div>
+                    <div class="col-5">
+                      <input type="text" id="advance_paid" name="advance_paid" class="form-control">
+          <label for="advance_paid">Amount Paying Now</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="invoice_number" name="invoice_number" class="form-control">
+                      <label for="invoice_number">Invoice Number</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="receipt_number" name="receipt_number" class="form-control">
+          <label for="receipt_number">Receipt Number</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="registered-mode_of_payment" name="registered-mode_of_payment" class="form-select">
+                        <option selected>select...</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Cheque">Cheque</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="UPI">UPI</option>
+                        <option value="DD">DD</option>
+                        </Select>
+                        <label for="registered-mode_of_payment">Mode of Payment</label>
+                    </div>
+                    <!-- hidden part -->
+                      <!-- For Chque Payment -->
+                      <div class="col-md-12" id="cheque-payment">
+                    <div class="row d-flex pt-2">
+                      <div class="col-md-4">
+                        <input type="text" id="cheque_number" name="cheque_number" class="form-control">
+                        <label for="cheque_number">Cheque Number</label>
+                      </div>
+                      <div class="col-md-4">
+                        <input type="text" id="bank_name" name="bank_name" class="form-control">
+            <label for="bank_name">Bank Name</label>
+                      </div>
+                      <div class="col-md-4">
+                        <input type="date" id="cheque_payment_date" name="cheque_payment_date" class="form-control">
+            <label for="cheque_payment_date">Payment Date</label>
+                      </div>
+                    </div>
+                  </div>
+                    <!-- For Chque Payment -->
+
+                    <!-- For UPI Payment -->
+                    <div class="col-md-12" id="upi-payment">
+                    <div class="row d-flex pt-2">
+                      <div class="col-md-6">
+                        <input type="text" id="upi_transaction_number" name="upi_transaction_number" class="form-control">
+                        <label for="upi_transaction_number">Transaction Number</label>
+                      </div>
+                    </div>
+                  </div>
+                    <!-- For UPI Payment -->
+                  <!-- For DD Payment -->
+                  <div class="col-md-12" id="DD-payment">
+                    <div class="row d-flex pt-2">
+                      <div class="col-md-4">
+                        <input type="text" id="DD_number" name="DD_number" class="form-control">
+                        <label for="DD_number">DD Number</label>
+                      </div>
+                      <div class="col-md-4">
+                        <input type="text" id="DD_bank_name" name="DD_bank_name" class="form-control">
+                        <label for="DD_bank_name">Bank Name</label>
+                      </div>
+                      <div class="col-md-4">
+                        <input type="date" id="DD_payment_date" name="DD_payment_date" class="form-control">
+            <label for="DD_payment_date">Payment Date</label>
+                      </div>
+                    </div>
+                  </div>
+                    <!-- For DD Payment -->
+                    <!-- For Bank Transfer Payment -->
+                  <div class="col-md-12" id="Bank-transfer">
+                    <div class="row d-flex pt-2">
+                      <div class="col-md-4">
+                        <input type="text" id="tranfer-bank_name" name="tranfer-bank_name" class="form-control">
+                        <label for="tranfer-bank_name">Bank Name</label>
+                      </div>
+                      <div class="col-md-4">
+                        <input type="text" id="account_number" name="account_number" class="form-control">
+                        <label for="account_number">Account Number</label>
+                      </div>
+                      <div class="col-md-4">
+                        <input type="text" id="IFSC_Code" name="IFSC_Code" class="form-control">
+                        <label for="IFSC_Code">IFSC Code</label>
+                      </div>
+                    </div>
+                  </div>
+                    <!-- For Bank Transfer Payment -->
+                    <!-- For Cash Payment -->
+                  <div class="col-md-12 " id="cash-payment">
+                    <div class="row d-flex pt-2">
+                      <p class="text-center">Enter the Number of Notes</p>
+                      <div class="col-md-12 d-flex justify-content-center">
+                        <table class="table table-bordered text-center" style="width: 50px;" id="cash-table">
+                          <thead>
+                            <tr>
+                              <th>Notes</th>
+                              <th>Quantity</th>
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="notes">500</td>
+                              <td><input id="500_quantity" type="number"></td>
+                              <td id="500_total"></td>
+                            </tr>
+                            <tr>
+                              <td class="notes">200</td>
+                              <td><input id="200_quantity" type="number" name="" id=""></td>
+                              <td id="200_total"></td>
+                            </tr>
+                            <tr>
+                              <td class="notes">100</td>
+                              <td><input id="100_quantity" type="number" name="" id=""></td>
+                              <td id="100_total"></td>
+                            </tr>
+                            <tr>
+                              <td class="notes">50</td>
+                              <td><input id="50_quantity" type="number" name="" id=""></td>
+                              <td id="50_total"></td>
+                            </tr>
+                            <tr>
+                              <td class="notes">20</td>
+                              <td><input id="20_quantity" type="number" name="" id=""></td>
+                              <td id="20_total"></td>
+                            </tr>
+                            <tr>
+                              <td class="notes">10</td>
+                              <td><input id="10_quantity" type="number" name="" id=""></td>
+                              <td id="10_total"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                  </div>
+                    <!-- For Cash Payment -->
+                    <!-- hidden part end -->
+                    <div class="col-md-4">
+                      <input type="text" id="total_bill_amount" name="total_bill_amount" class="form-control">
+                      <label for="total_bill_amount">Total Amount</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="alternative_address" name="alternative_address" class="form-control">
+          <label for="alternative_address">Alternate Address</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="alternative_email" name="alternative_email" class="form-control">
+          <label for="alternative_email">Alternate Email</label>
+                    </div>
+                  </div>
+                </form>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <input type="number" id="alternative_contact_number" name="alternative_contact_number" class="form-control">
+        <label for="alternative_contact_number">Alternate Contact No</label>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Mark as register modal end -->
+    
+<!-- Excel upload Modal start -->
+<div class="modal" id="excelUploadModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Upload Excel Sheet</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="upload-container">
+              <input type="file" id="fileInput" accept="">
+              <button id="uploadButton">Upload</button>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Excel upload modal end -->
+
+</div>
+<script>
+  var ctx = document.getElementById('barChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels:{{ labels | safe }},
+                datasets: [{ 
+                    data:{{ values | safe }},
+                    
+                    backgroundColor: [
+                    'rgba(255, 153, 0, 0.8)',
+'rgba(26, 178, 255, 0.8)',
+'rgba(255, 77, 77, 0.8)',
+'rgba(0, 128, 255, 0.8)',
+'rgba(153, 153, 102, 0.8)'
+
+      ],
+      borderColor: [
+      'rgba(255, 153, 0, 0.8)',
+'rgba(26, 178, 255, 0.8)',
+'rgba(255, 77, 77, 0.8)',
+'rgba(0, 128, 255, 0.8)',
+'rgba(153, 153, 102, 0.8)',
+        'rgba(255, 159, 64, 1)'
+      ],
+                    borderWidth: 0.4
+                }]
+            },
+            options: {
+            maintainAspectRatio: false,
+            responsive: false,
+            width: 100,
+            height: 100,
+            legend: {
+              display: true,
+              position: 'right', // Position of the legend (other options: 'top', 'left', 'bottom')
+          },
+            }
+        });
+
+
+</script>
+<script>
+  var ctx = document.getElementById('courseChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels:["New Leads", "Followup Leads", "Prospects", "Registered", "Closed"],
+                 datasets: [
+              {
+                label: "Python",
+                borderColor:  'rgba(255, 102, 102, 0.5)',
+                backgroundColor:  'rgba(255, 102, 102, 0.5)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [79, 40, 15, 35, 25]
+              },
+              {
+                label: "Java",
+                borderColor: 'rgba(0, 204, 68, 0.5)',
+                backgroundColor: 'rgba(0, 204, 68, 0.5)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [40, 30, 20, 10, 50]
+              },
+              {
+                label: "Web Designing",
+                borderColor: 'rgba(255, 148, 77, 0.5)',
+                backgroundColor: 'rgba(255, 148, 77, 0.5)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [70, 10, 30, 40, 25]
+              },
+              {
+                label: "Marketing",
+                borderColor: 'rgba(77, 166, 255, 0.5)',
+                backgroundColor: 'rgba(77, 166, 255, 0.5)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [50, 10, 30, 40, 25]
+              },
+
+          ]
+            },
+            options: {
+            maintainAspectRatio: false,
+            responsive: false,
+            width: 300,
+            height: 100,
+            }
+        });
+</script>
+<script>
+  var ctx = document.getElementById('sourseChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels:["Naukri", "Indeed", "Mail", "Whatsapp", "Foundit","Just Dial"],
+                datasets: [{ 
+                    label:'Source',
+                    data:{{source_data | safe }},
+                    
+                    backgroundColor: [
+                    'rgba(255, 77, 77, 0.5)',
+'rgba(255, 163, 26, 0.5)',
+'rgba(255, 148, 77, 0.5)',
+'rgba(102, 153, 255, 0.5)',
+'rgba(51, 255, 119,0.5)',
+'rgba(0, 153, 51, 0.5)'
+
+      ],
+      borderColor: [
+      'rgba(255, 77, 77, 0.5)',
+'rgba(255, 163, 26, 0.5)',
+'rgba(255, 148, 77, 0.5)',
+'rgba(102, 153, 255, 0.5)',
+'rgba(51, 255, 119,0.5)',
+'rgba(0, 153, 51, 0.5)'
+
+      ],
+                    borderWidth: 0.5
+                }]
+            },
+            options: {
+            maintainAspectRatio: false,
+            responsive: false,
+            width: 100,
+            height: 100,
+            }
+        });
+</script>
+<script>
+ // employee comaprison chart script file
+        var ctx = document.getElementById('employeeChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels:["Naveen", "Vivek", "Pranav"],
+                 datasets: [
+              {
+                label: "New Leads",
+                borderColor:  'rgba(255, 99, 132, 0.2)',
+                backgroundColor:  'rgba(255, 99, 132, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [20, 40, 15, 35, 25]
+              },
+              {
+                label: "Followup Leads",
+                borderColor: 'rgba(54, 162, 235, 0.2)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [40, 30, 20, 10, 50]
+              },
+              {
+                label: "Prospects",
+                borderColor: 'rgba(255, 206, 86, 0.2)',
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [70, 10, 30, 40, 25]
+              },
+              {
+                label: "Registered",
+                borderColor: 'rgba(75, 192, 192, 0.2)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [70, 10, 30, 40, 25]
+              },
+              {
+                label: "Closed",
+                borderColor: 'rgba(255, 159, 64, 0.2)',
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                pointRadius: 0,
+                fill: false,
+                borderWidth: 1,
+                fill: 'origin',
+                data: [60, 20, 30, 40, 35]
+              },
+
+          ]
+            },
+            options: {
+            maintainAspectRatio: false,
+            responsive: false,
+            width: 300,
+            height: 100,
+            }
+        });
+    
+</script>
+<!-- <script src="{% static 'js/leadschartby_course.js' %}"></script> -->
+<script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+<script src="{% static 'assets/js/off-canvas.js' %}"></script>
+<script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+<script src="{% static 'assets/js/misc.js' %}"></script>
+ <!-- <script src="{% static 'assets/js/dashboard.js' %}"></script>  -->
+ <!-- <script src="{% static 'js/leadschart.js'%}"></script> -->
+ 
+ <!-- <script src="{% static 'js/leadschartby_source.js' %}"></script> -->
+
+<script src="{% static 'assets/js/todolist.js' %}"></script>
+<script src="{% static 'assets/vendors/chart.js/Chart.min.js' %}"></script>
+<!-- <script src="{% static 'assets/js/chart.js' %}"></script> -->
+<script src="{% static 'js/searchload.js' %}"></script>
+  <script src="{% static 'js/register-form.js' %}"></script> 
+
+  
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="barChart" width="500" height="300"></canvas>
+
+    <script>
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                //labels: {{ labels | safe }}, 
+                labels:["January", "February", "March", "April", "May", "June", "July"], // Render labels from Django view
+                datasets: [{
+                    label: 'Your Bar Chart Title',
+                    //data: {{ values | safe }},  // Render values from Django view
+                    data:[100, 20, 30, 40, 50, 60, 70],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Example background color
+                    borderColor: 'rgba(75, 192, 192, 1)', // Example border color
+                    borderWidth: 1
+                }]
+            },
+            options: {
+            maintainAspectRatio: false, // Add this line to prevent aspect ratio adjustment
+            responsive: false, // Add this line to prevent chart responsiveness
+            width: 100, // Set the width of the chart
+            height: 100, // Set the height of the chart
+        }
+        });
+    </script>
+</body>
+</html>

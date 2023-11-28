@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Manager Customer Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="{% static 'css/Filter.css' %}" rel="stylesheet">
+<script src="{% static 'js/Filter.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- Nav bar -->
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+              <a class="navbar-brand brand-logo" href=""><img src="{% static 'assets/images/merida_tech_minds_opc_pvt_ltd_cover-removebg-preview.png' %}" alt="logo" style="height: 60px;width: 200px;"/></a>
+              <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'assets/images/logo-mini.svg' %}" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <!-- Search Criteria -->
+            <div class="row ms-2 ">
+              <div class="col-xl-12 col-sm-4">
+                <div class="row p-2 mt-2">
+                  <div class="col-12 p-2 rounded d-none d-lg-block" id="clickableDiv" style="border: 1px solid lightgray;height: 40px;color: black;width: 550px;">
+                  <i class="mdi mdi-magnify" style="font-size: 18px;" onclick="send()"></i>
+                  </div>
+                 </div>
+
+                 <div id="hiddenDiv">
+                  <div class="row justify-content-end"  style="background-color: white; color: black;border: 1px solid lightgray; border-bottom: none;">
+                    <button class="d-flex justify-content-center" style="width: 60px;border: none;" id="close-btn">Close</button>
+                   </div>
+  
+                   <div class="row p-0" id="subhiddendiv" style="background-color: white;border: 1px solid lightgray;">
+                        <div  class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Leads</h5>
+                          <button class="custom-btn" data-searchfield="lead Name" id="lead">lead Name</button>
+                          <button class="custom-btn" data-searchfield="Contact Number">Contact Number</button>
+                          <button class="custom-btn" data-searchfield="New Leads">New Leads</button>
+                          <button class="custom-btn" data-searchfield="Followup">Followup</button>
+                          <button class="custom-btn" data-searchfield="Prospects">Prospects</button>
+                          <button class="custom-btn" data-searchfield="Closed">Closed</button>
+                        </div>
+                        <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Course</h5>
+                            <button class="custom-btn" data-searchfield="Python Full Stack">Python Full Stack</button>
+                            <button class="custom-btn" data-searchfield="Data Science">Data Science</button>
+                            <button class="custom-btn" data-searchfield="Marketing">Marketing</button>
+                            <button class="custom-btn" data-searchfield="Spoken English">Spoken English</button>
+                          </div>
+                        <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Source</h5>
+                            <button class="custom-btn" data-searchfield="Naukri">Naukri</button>
+                          <button class="custom-btn" data-searchfield="Mail">Mail</button>
+                          <button class="custom-btn" data-searchfield="Whatsapp">Whatsapp</button>
+                          <button class="custom-btn" data-searchfield="Foundit">Foundit</button>
+                          <button class="custom-btn" data-searchfield="Indeed">Indeed</button>
+                          <button class="custom-btn" data-searchfield="Just Dial">Just Dial</button>
+                    </div>
+                    <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                      <h5 class="text-center">Employee</h5>
+                        <button class="custom-btn" data-searchfield="Pranav">Pranav</button>
+                        <button class="custom-btn" data-searchfield="Vivek">Vivek</button>
+                        <button class="custom-btn" data-searchfield="Naveen">Naveen</button>
+                </div>
+                <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                  <h5 class="text-center">Time</h5>
+                  <button class="custom-btn" data-searchfield="time">time</button>
+                  <button class="custom-btn" data-searchfield="today">today</button>
+
+                  <div class="dropdown" id="custom-date-div">
+                    <button class="custom-btn" data-bs-toggle="dropdown" aria-expanded="false" data-searchfield="Custom Date">
+                      Custom Date
+                    </button>
+                    <ul class="dropdown-menu" id="custom-date-dropdown">
+                      <li><button id="from-date-btn" onclick="addFromDate()">From</button><input type="date" id="from-date"></li>
+                      <li><button id="to-date-btn" onclick="addToDate()">To</button><input type="date" id="to-date"></li>
+                    </ul>
+                  </div>
+            </div>
+            <div class="col-xl-2 col-md-6 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+              <h5 class="text-center">Degree</h5>
+              <button class="custom-btn" data-searchfield="Qualification">Quaification</button>
+              <button class="custom-btn" data-searchfield="Percentage">Percentage</button>
+        </div>
+      </div>
+    </div>
+              </div>
+        </div>
+           <!-- Search criteria end -->
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item nav-profile dropdown d-none d-lg-block">
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="nav-profile-img">
+                    <img src="{% static 'assets/images/user.png' %}" alt="image">
+                  </div>
+                </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="mdi mdi-bell-outline"></i>
+                    <span class="count-symbol"></span>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-lg-block full-screen-link">
+                  <a class="nav-link">
+                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                  </a>
+                </li>
+                <li class="nav-item dropdown pt-4">
+                  <a class="nav-link dropdown-toggle" id="createRecordDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-account-plus"></i>
+                  </a>
+                  <ul class="dropdown-menu navbar-dropdown" aria-labelledby="createRecordDropdown">
+                      <li>
+                        <button class="dropdown-item justify-content-start" type="button" data-bs-toggle="modal" data-bs-target="#customerModal"><i class="mdi mdi-account-plus me-2"></i>Customer</button>
+                      </li>
+                      <li>
+                        <div class="dropdown-divider"></div>
+                        <p class="mt-2"><i class="mdi mdi-link-variant ms-3 me-2"></i>Upload Excel</p>
+                      <form class="px-2 py-0 dropdown-item">
+                        <div class="form-group">
+                          <input type="file" class="form-control">
+                          <button type="submit" class="btn btn-info btn-sm mt-1">Upload</button>
+                        </div>
+                      </form>
+                    </li>
+                    </ul>
+                </li>
+              <li class="nav-item d-none d-lg-block">
+                  <a class="nav-link" style="cursor: pointer;">
+                      <i class="mdi mdi-database" id="database-button"></i>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                  <a class="nav-link" style="cursor: pointer;">
+                      <i class="mdi mdi-calendar" id="calendar-button"></i>
+                  </a>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- Navbar end -->
+
+        <!-- Content -->
+        <div class="container-fluid page-body-wrapper px-0">
+        <!-- dashboard side bar -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="{% static 'assets/images/user.png' %}" alt="profile">
+                  <span class="login-status online"></span>
+                  <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">{{user}}</span>
+                  <span class="text-secondary text-small">{{designation}}</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'manager-home' %}">
+                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Leads</span>
+                <i class="mdi mdi-account menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="{% url 'manager-page-clientleads' %}">Client</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'manager-page-customerleads' %}">Customer</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <span class="menu-title">Employees</span>
+                <i class="mdi mdi-account-multiple menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'manager-activities' %}">
+                <span class="menu-title">Activities</span>
+                <i class="mdi mdi-account-multiple menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#assignto" aria-expanded="false" aria-controls="assignto">
+                <span class="menu-title">Assign To</span>
+                <i class="mdi mdi-account-switch
+                menu-icon"></i>
+              </a>
+              <div class="collapse" id="assignto">
+                <ul class="nav flex-column sub-menu">
+                  {% for auth_users in auth_users %}
+                  <li class="nav-item"><a class="nav-link" type="button" onclick="openManagerPage({{auth_users.id}})">{{auth_users}}</a></li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+
+          </ul>
+        </nav>
+        <!-- Dashboard side bar end -->
+
+        <!-- Content table start -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+              <div class="row">
+                  <div class="dropdown">
+                      <button class="btn btn-outline-secondary dropdown-toggle ms-2 mt-4" type="button" id="customerleads-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                        Leads
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#" id="customernewleads-btn">New Leads</a></li>
+                        <li><a class="dropdown-item" href="#" id="customerfollowupleads-btn">Followup Leads</a></li>
+                        <li><a class="dropdown-item" href="#" id="customerprospects-btn">Prospects</a></li>
+                        <li><a class="dropdown-item" href="#" id="customerregistered-btn">Registered</a></li>
+                        <li><a class="dropdown-item" href="#" id="customerclosed-btn">Closed</a></li>
+                      </ul>
+                    </div>
+              </div>
+              <!-- Tables -->
+
+            <div class="LeadsTable row mt-4" id="customernewLeadsTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                        <p style="font-weight: 500;">Customer New Leads</p>
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter bg-info" style="color: white;"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table" id="myTable">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th></th>
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course Enquired" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for lead in customer_leads %}
+                              <tr>
+                                <td><input type="checkbox" class="record-checkbox"></td>
+                                <td scope="row">{{lead.lead_id}}</td>
+                                <td>{{lead.lead_name}}</td>
+                                <td>{{lead.contact_number}}</td>
+                                <td>{{lead.course_enquired}}</td>
+                                <td>{{lead.level_of_lead}}</td>
+                                <td><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#followupModal" onclick="fetch_modal_id({{lead.lead_id}})">
+                                  Followup
+                                </button></td>
+                                <td><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#prospectsModal" onclick="fetch_prospectsModal_id({{lead.lead_id}})">
+                                  Prospects
+                                </button></td>
+                                <td> <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#closedModal" onclick="fetch_closedModal_id({{lead.lead_id}})">
+                                  Closed
+                                </button></td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>
+          
+                        
+                    </div>
+                  </div>
+              </div>
+                  </div>
+            </div>
+            <div class="LeadsTable row mt-4" id="customerfollowupLeadsTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                        <p style="font-weight: 500;">Followup Leads</p>
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter bg-info" style="color: white;"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course Enquired" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for lead in customer_followup %}
+                                <tr>
+                                  <td scope="row">{{lead.lead_id}}</td>
+                                  <td>{{lead.lead_name}}</td>
+                                  <td>{{lead.contact_number}}</td>
+                                  <td>{{lead.course_enquired}}</td>
+                                  <td>{{lead.level_of_lead}}</td>
+                                  
+                                  <td><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#followupModal" onclick="fetch_modal_id({{lead.lead_id}})">
+                                    Followup
+                                  </button></td>
+                                  <td><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#prospectsModal" onclick="fetch_prospectsModal_id({{lead.lead_id}})">
+                                    Prospects
+                                  </button></td>
+                                  <td> <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#closedModal" onclick="fetch_closedModal_id({{lead.lead_id}})">
+                                    Closed
+                                  </button></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="LeadsTable row mt-4" id="customerprospectsTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                        <p style="font-weight: 500;">Prospects Leads</p>
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter bg-info" style="color: white;"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Preffered Course" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Expected Reg Date" disabled></th>
+                                    <th></th>
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for lead in customer_prospect %}
+                                <tr>
+                                  <td scope="row">{{lead.lead_id}}</td>
+                                  <td>{{lead.lead_name}}</td>
+                                  <td>{{lead.contact_number}}</td>
+                                  <td>Python</td>
+                                  <td>Employee</td>
+                                  <td>Course</td>
+                                  <td><button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#markAsRegisterModal" onclick="fetch_registeredModal_id({{lead.lead_id}})">
+                                    Register
+                                  </button></td>
+                                  <td> <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#closedModal" onclick="fetch_closedModal_id({{lead.lead_id}})">
+                                    Closed
+                                  </button></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            </div>
+            <div class="LeadsTable row mt-4" id="customerregisteredTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                        <p style="font-weight: 500;">Registered Leads</p>
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter bg-info" style="color: white;"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course Enquired" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course" disabled></th>
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td scope="row">1</td>
+                                  <td>John</td>
+                                  <td>6576879807</td>
+                                  <td>Python</td>
+                                  <td>Employee</td>
+                                  <td>Course</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            </div>
+            <div class="LeadsTable row mt-4" id="customerclosedTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                        <p style="font-weight: 500;">Closed Leads</p>
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter bg-info" style="color: white;"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course Enquired" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Stage of Closure" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Reason of Closure" disabled></th>
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for client_leads in customer_closed %}
+                              <tr>
+                                <td>{{client_leads.lead_id}}</td>
+                                <td>{{client_leads.lead_name}}</td>
+                                <td>{{client_leads.contact_number}}</td>
+                                <td>abc</td>
+                                <td>Python</td>
+                                <td>Employee</td>
+                                <td>Course</td>
+                                <td>aaaa</td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+                  </div>
+            </div>
+              <!-- Tables end -->
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial -->
+        </div>
+        </div>
+
+<!-- Prospects Modal -->
+
+
+<div class="modal" id="prospectsModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header mx-4">
+        <h4 class="modal-title">Prospects Forms</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+          <div class="row justify-content-center">
+              <div class="col-xl-8 ">
+                  <form class="row g-3 bg-light" style="border: 1px solid lightgray;"
+                  action="{% if customer %}{% url 'manager-client-prospect' stage=customer %}{% endif %} " method="POST">
+                  {% csrf_token %}
+                    <div class="col-md-4">
+                      <label for="lead_id">Lead Id</label>
+                      <input type="number" id="prospects_lead_id" name="lead_id" class="form-control" readonly>
+
+                      <label for="user_id">User Id</label>
+                      <input type="text" id="user_id" name="user_id" value="{{user}}" class="form-control" readonly>
+                    </div>
+                      <div class="col-md-8">
+                        <label for="Tentative Batch Start Date">Tentative Batch Start Date</label>
+                          <input type="date" id="Tentative Batch Start Date" name="Tentative Batch Start Date" class="form-control" placeholder="Walk-in Date">
+                        </div>
+                      <div class="col-md-6">
+                        <label for="preffered_batch_start_time">Preferred Batch Start Time</label>
+                          <input type="time" id="preffered_batch_start_time" name="preffered_batch_start_time" class="form-control" placeholder="Walk-in Time">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="preffered_batch_end_time">Preferred Batch End Time</label>
+                          <input type="time" id="preffered_batch_end_time" name="preffered_batch_end_time" class="form-control" placeholder="Walk-in Time">
+                        </div>
+                        <div class="col-12">
+                          <label for="remarks">Remarks</label>
+                          <textarea class="form-control" placeholder="Remarks..." id="remarks" name="remarks" style="height: 100px"></textarea>
+                      </div>
+                        <div class="col-md-6">
+                          <label for="preffered_batch_type">Preferred Batch Type</label>
+                          <select id="preffered_batch_type" name="preffered_batch_type" class="form-select">
+                              <option selected>select...</option>
+                              <option value="">Weekdays</option>
+                              <option value="">Weekend</option>
+                              </Select>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="preffered_class_type">Preferred Class Type</label>
+                          <select id="preffered_class_type" name="preffered_class_type" class="form-select">
+                              <option selected>select...</option>
+                              <option value="">Online</option>
+                              <option value="">Offline</option>
+                              <option value="">Hybrid</option>
+                              </Select>
+                        </div>
+                        <div class="col-6">
+                          <label for="preffered_course">Preferred Course</label>
+                          <input type="text" id="preffered_course" name="preffered_course" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="expected_register_date">Expected Registration Date</label>
+                          <input type="date" id="expected_register_date" name="expected_registration_date" class="form-control" >
+                        </div>
+                        <div class="col-md-4">
+                          <label for="billing_amount" >Billing Amount</label>
+                          <input type="number" id="billing_amount" name="billing_amount" class="form-control" >
+                        </div>
+                        <div class="col-4">
+                          <label for="expected_collection" >Expected Collection</label>
+                          <input type="number" id="expected_collection" name="expected_collection" class="form-control" >
+                        </div>
+                        <div class="col-md-4">
+                          <label for="mode_of_payment">Mode of Payment</label>
+                          <select id="mode_of_payment" name="mode_of_payment" class="form-select">
+                              <option selected>select...</option>
+                              <option value="Cash">Cash</option>
+                              <option value="Cheque">Cheque</option>
+                              <option value="Bank Transfer">Bank Transfer</option>
+                              <option value="UPI">UPI</option>
+                              </Select>
+                              <label for="visiting_time">visiting_time</label>
+                          <input type="time" id="visiting_time" name="visiting_time" class="form-control" >
+
+                        </div>
+                      <div class="col-12 text-end">
+                          <input type="submit" class="btn btn-primary" value="Save" ></button>
+                      </div>
+                    </form>
+              </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="prospects_closed_btn">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Prospects Modal end -->
+
+<!-- Followup modal start -->
+<div class="modal" id="followupModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Followup Registration Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-xl-6">
+            <form class="row g-3 bg-light" style="border: 1px solid lightgray;"
+            action="{% if customer %}{% url 'manager-client-follow-up' stage=customer %}{% endif %}" method="POST">
+            {% csrf_token %}
+                <div class="col-md-4">
+                    <input type="text" id="followup_lead_id" name="lead_id"   class="form-control" readonly>
+                    <label for="lead_id">Lead Id</label>
+
+                    <input type="text" id="user_id" name="user_id" 
+                    value="{{user}}"  class="form-control" >
+                    <label for="lead_id">User Id</label>
+                </div>
+                
+                <div class="col-md-10">
+                  <input type="date" id="followup_date" name="followup_date" class="form-control" >
+                  <label for="followup_date">FollowUp Date</label>
+                </div>
+                <div class="col-12">
+                    <textarea class="form-control" placeholder="Remarks..." id="remarks" name="remarks" style="height: 100px"></textarea>
+                <label for="remarks">Remarks</label>
+                </div>
+                <div class="col-md-12">
+                    <input type="date" id="walkin_date" name="walkin_date" class="form-control" placeholder="Walk-in Date">
+                <label for="walkin_date" >Expected Walk-in Date</label>
+                  </div>
+                <div class="col-md-12">
+                    <input type="time" id="walkin_time" name="walkin_time" class="form-control" placeholder="Walk-in Time">
+                <label for="walkin_time" >Expected Walk-in Time</label>
+                  </div>
+                  <div class="col-md-12">
+                <label for="need_supervisor_attention">Need Supervisor Attention</label>
+                   <input type="checkbox" id="need_supervisor_attention" name="need_supervisor_attention" value="True">
+                   <!-- <input type="hidden" name="user_id" id="followupmodal_user_id" value={{user_id}}>				
+                   <input type="hidden" name="model_name" id="followupmodal_model_name" value={{model_name}}> -->
+                   <!-- <input type="text" name="lead_id" id="followupmodal_lead_id" value=""> -->
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary">Close</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Followup modal end -->
+
+<!-- Closed modal start -->
+
+
+<div class="modal" id="closedModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Closed Registration Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-xl-6">
+              <form class="row g-3 bg-light" style="border: 1px solid lightgray;"
+              action="{% if customer %}{% url 'manager-clientrecord-close' stage=customer %}{% endif %}" method="POST"
+              >
+              {% csrf_token %}
+                  <div class="col-md-6">
+                      <input type="text" id="closed_lead_id" name="lead_id" class="form-control" readonly>
+                      <label for="lead_id">Lead Id</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" id="lead_id" name="user_id" class="form-control" value="{{user}}" readonly>
+                    <label for="lead_id">User Id</label>
+                </div>
+                  
+                  <div class="col-md-12">
+                      <textarea class="form-control" placeholder="Remarks.." id="history" name="remarks" style="height: 100px" required></textarea>
+                      <label for="summary">Remarks</label>
+                  </div>
+                  <div class="col-md-12">
+                      <textarea class="form-control" placeholder="Reason for Closure" id="reason" name="reason" style="height: 100px" required></textarea>
+                  <label for="reason-for-closure">Reason for Closure</label>
+                  </div>
+                  
+                  <div class="col-12">
+                      <label>Opportunities in future</label>
+                    <input type="radio" name="opportunities_in_future" id="opportunities_in_future_yes" value="True">
+                    <label for="opportunities_in_future_yes">Yes</label>
+                    <input type="radio" name="opportunities_in_future" id="opportunities_in_future_no" value="False">
+                    <label for="opportunities_in_future_no">No</label>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary">Close</button>
+                  </div>
+                </form>
+          </div>
+      </div>
+      </div>
+      
+
+    </div>
+  </div>
+</div>
+<!-- Closed modal end -->
+
+<!-- Client Modal start -->
+<div class="modal" id="clientModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Client Registration Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-xl-8 ">
+              <form class="row g-3 bg-light" style="border: 1px solid lightgray;">
+                  <div class="col-md-4">
+                      <input type="text" id="lead_id" name="lead_id" class="form-control" hidden>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="lead_name" name="lead_name" class="form-control">
+                  <label for="lead_name">Name</label>
+                  </div>
+                  <div class="col-4">
+                      <input type="text" id="contact_number" name="contact_number" class="form-control" pattern="[0-9]{10}">
+                      <label for="contact_number">Contact Number</label>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="door_number" name="door_number" class="form-control">
+                      <label for="door_number">Door Number</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="street_name" name="street_name" class="form-control">
+                      <label for="street_name">Street Name</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="area" name="area" class="form-control">
+  <label for="area">Area</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="city" name="city" class="form-select">
+                          <option selected>Select a City</option>
+                          </Select>
+                          <label for="city">City</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="state" name="state" class="form-select">
+                          <option selected>Select a State</option>
+                          </Select>
+                          <label for="state">State</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="pincode" name="pincode" class="form-control" pattern="[0-9]{6}">
+                      <label for="pincode">Pinode</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="date" id="dob" name="dob" class="form-control">
+  <label for="dob">Date of Birth</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="email" id="email" name="email" class="form-control">
+  <label for="email">Email</label>
+                    </div>
+                    <div class="col-5">
+                      <select id="gender" name="gender" class="form-select">
+                          <option selected>Select your Gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Two-Spirit">Two-Spirit</option>
+                          </Select>
+                          <label for="gender">Gender</label>
+                    </div>
+                  
+                    <div class="col-md-4">
+                      <input type="text" id="company_name" name="company_name" class="form-control">
+    <label for="company_name">Company Name</label>
+                  </div>
+                  <div class="col-4">
+                      <input type="text" id="company_contact_number" name="company_contact_number" class="form-control" pattern="[0-9]{10}">
+                      <label for="company_contact_number">Company Contact Number</label>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="company_door_number" name="company_door_number" class="form-control">
+                      <label for="company_door_number">Company Door Number</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="company_street_name" name="company_street_name" class="form-control">
+                      <label for="company_street_name">Company Street Name</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="company_area" name="company_area" class="form-control">
+                 <label for="company_area">Area</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="company_city" name="company_city" class="form-select">
+                          <option selected>Select a City</option>
+                          </Select>
+                          <label for="company_city">City</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="company_" name="company_state" class="form-select">
+                          <option selected>Select a State</option>
+                          </Select>
+                          <label for="company_state">State</label>
+                    </div>
+                    <div class="col-4">
+                      <input type="text" id="company_pincode" name="company_pincode" class="form-control" pattern="[0-9]{6}">
+                      <label for="company_pincode">Pinode</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="company_gstnumber" name="company_gstnumber" class="form-control">
+                      <label for="company_gstnumber">GST Number</label>
+                    </div>
+                    <div class="col-md-5">
+                      <input type="text" id="company_field" name="company_field" class="form-control">
+                      <label for="company_field">Company Field</label>
+                    </div>
+                    <div class="col-5">
+                      <input type="text" id="comapny_website" name="comapny_website" class="form-control">
+                 <label for="comapny_website">Company Website</label>
+                    </div>
+
+                  <div class="col-md-4">
+                      <select id="master_degree" name="master_degree" class="form-select">
+                          <option selected>Select your Degree</option>
+                          <option value="Msc">Msc</option>
+                          <option value="ME">ME</option>
+                          <option value="MBA">MBA</option>
+                          <option value="MCA">MCA</option>
+                          <option value="M-Tech">M-Tech</option>
+                          <option value="MS">MS</option>
+                          <option value="MCom">MCom</option>
+                          </Select>
+                          <label for="master_degree">Master Degree</label>
+                    </div>
+                  <div class="col-md-5">
+                      <input type="text" id="master_specification" name="master_specification" class="form-control">
+  <label for="master_specification">Master Specification</label>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="text" id="master_percentage" name="master_percentage" class="form-control">
+                      <label for="master_percentage">Percentage Achieved</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="bachelor_degree" name="bachelor_degree" class="form-select">
+                          <option selected>Select your Degree</option>
+                          <option value="Bsc">Bsc</option>
+                          <option value="BE">BE</option>
+                          <option value="BBA">BBA</option>
+                          <option value="BCA">BCA</option>
+                          <option value="B-Tech">B-Tech</option>
+                          <option value="BCom">BCom</option>
+                          </Select>
+                          <label for="bachelor_degree">Bachelor Degree</label>
+                    </div>
+                  <div class="col-md-5">
+                      <input type="text" id="bachelor_specification" name="bachelor_specification" class="form-control">
+  <label for="bachelor_specification">Bachelor Specification</label>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="text" id="bachelor_percentage" name="bachelor_percentage" class="form-control">
+                      <label for="bachelor_percentage">Percentage Achieved</label>
+                    </div>
+                    <div class="col-md-4">
+                      <input type="text" id="course_enquired" name="course_enquired" class="form-control">
+                      <label for="course_enquired">Course Enquired</label>
+                  </div>
+                  <div class="col-md-4">
+                      <input type="text" id="enquiry_location" name="enquiry_location" class="form-control">
+                      <label for="enquiry_location">Enquiry location</label>
+                  </div>
+                  <div class="col-4">
+                      <input type="text" id="source" name="source" class="form-control">
+                      <label for="source">Source</label>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="text" name="technologies_known" id="customer_technologies_known" class="form-control">
+                      <label for="technologies_known" class="form-label">Technologies Known</label>
+                    </div>
+                    <div class="col-md-4">
+                      <select id="lead-reg-level-of-lead" class="form-select">
+                        <option selected>Choose...</option>
+                        <option>Fresher</option>
+                        <option>Employee</option>
+                        <option>Student</option>
+                      </select>
+                      <label for="level-of-lead" class="form-label">Level of Lead</label>
+                    </div>
+                    <div class="col-md-12" id="employee_level">
+                      <div class="row">
+                        <div class="col-md-6"> <input type="text" class="form-control" id="designation">
+                          <label for="designation" class="form-label">Designation</label></div>
+                          <div class="col-md-6"> <input type="text" class="form-control" id="salary">
+                            <label for="salary" class="form-label">Salary</label></div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+          </div>
+          
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Register" ></button>
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Client modal end -->
+
+<!-- Customer modal start -->
+{% if messages %}
+    <script>
+       window.onload = function() {
+            {% for message in messages %}
+                var messageText = "{{ message|safe }}";
+                alert(messageText);
+            {% endfor %}
+        }
+    </script>
+{% endif %}
+
+<!-- customer Modal start -->
+{% include  'forms/customer-registration-modal/customer-lead-registration-form.html' %}
+<!-- Customer modal end -->
+
+<!-- Mark as Register modal start -->
+{% include 'Manager_templates/registered-form.html' %}
+<!-- Excel upload Modal start -->
+{% include 'forms/import_excel.html' %}
+  
+<!-- Excel upload modal end -->
+
+
+    
+    {% if messages %}
+    <script>
+       window.onload = function() {
+            {% for message in messages %}
+                var messageText = "{{ message|safe }}";
+                alert(messageText);
+            {% endfor %}
+        }
+    </script>
+{% endif %}
+  
+<script>
+  function fetch_modal_id(x){
+    var modalDataElement = document.getElementById('followup_lead_id');
+    modalDataElement.value = x;
+  }
+
+  function fetch_closedModal_id(x){
+    var modalDataElement = document.getElementById('closed_lead_id');
+    modalDataElement.value = x;
+  }
+
+  function fetch_prospectsModal_id(x){
+    var modalDataElement = document.getElementById('prospects_lead_id');
+    modalDataElement.value = x;
+  }
+
+  function fetch_registeredModal_id(x){
+    var modalDataElement = document.getElementById('registered_lead_id');
+    modalDataElement.value = x;
+  }
+</script>
+
+<script>
+  function openManagerPage(auth_user_id) {
+    console.log(name)
+      var table = document.getElementById("myTable");
+          var checkboxes = table.getElementsByClassName("record-checkbox");
+          var selectedRecords = [];
+  
+          for (var i = 0; i < checkboxes.length; i++) {
+              if (checkboxes[i].checked) {
+                  var row = checkboxes[i].closest("tr");
+                  var cells = row.getElementsByTagName("td");
+                  var id = cells[1].innerText
+                  selectedRecords.push(id);
+              }
+          }
+      var recordsString = selectedRecords.join(',');
+      var url='assign_to'+'/customer'+'/'+auth_user_id+'/'+recordsString
+      console.log(url)
+       window.location.href = url;
+  }
+  </script>
+
+  <!-- <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script> -->
+  <script src="{% static 'assets/js/off-canvas.js' %}"></script>
+  <script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'assets/js/misc.js' %}"></script>
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+  <script src="{% static 'assets/js/todolist.js' %}"></script>
+  <script src="{% static 'assets/vendors/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/js/chart.js' %}"></script>
+  <script src="{% static 'js/customer-hide.js' %}"></script>
+  <script src="{% static 'js/searchload.js' %}"></script>
+
+</body>
+</html>

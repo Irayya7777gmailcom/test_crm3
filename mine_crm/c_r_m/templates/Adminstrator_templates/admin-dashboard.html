@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Administrator Dashboard</title>
+     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      
+        h6{
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+        .custom-btn{
+          background: none;
+          border: none;
+          margin-bottom: 5px;
+        }
+
+        #hiddenDiv{
+          display: none;
+        }
+        .custom-btn:hover{
+          font-weight: 600;
+        }
+        .clickable-div-btn{
+          background: none;
+          border: none;
+        }
+        #subhiddendiv{
+          max-height: 450px;
+          overflow-y: auto;
+        }
+        #custom-date-dropdown{
+            text-align: center;
+        }
+        #from-date-btn{
+          border: none;
+          background: none;
+        }
+        #to-date-btn{
+          border: none;
+          background: none;
+        }
+        #from-date{
+          width: 110px;
+        }
+        #to-date{
+          width: 110px;
+          margin-left: 20px;
+        }
+/* 
+        #custom-date-dropdown:hover #custom-date-div {
+            display: block;
+        } */
+    </style>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- Nav bar -->
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+              <a class="navbar-brand brand-logo" href=""><img src="{% static 'assets/images/merida_tech_minds_opc_pvt_ltd_cover-removebg-preview.png' %}" alt="logo" style="height: 60px;width: 200px;"/></a>
+              <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'assets/images/logo-mini.svg' %}" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <!-- Search Criteria -->
+            <div class="row ms-2 ">
+              <div class="col-xl-12 col-sm-4">
+                <div class="row p-2 mt-2">
+                  <div class="col-12 p-2 rounded" id="clickableDiv" style="border: 1px solid lightgray;height: 40px;color: black;width: 550px;">
+                  <i class="mdi mdi-magnify" style="font-size: 18px;" onclick="send()"></i>
+                  </div>
+                 </div>
+
+                 <div id="hiddenDiv">
+                  <div class="row justify-content-end"  style="background-color: white; color: black;border: 1px solid lightgray; border-bottom: none;">
+                    <button class="d-flex justify-content-center" style="width: 60px;border: none;" id="close-btn">Close</button>
+                   </div>
+  
+                   <div class="row p-0" id="subhiddendiv" style="background-color: white;border: 1px solid lightgray;">
+                        <div  class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Leads</h5>
+                          <button class="custom-btn" data-searchfield="lead Name" id="lead">lead Name</button>
+                          <button class="custom-btn" data-searchfield="Contact Number">Contact Number</button>
+                          <button class="custom-btn" data-searchfield="New Leads">New Leads</button>
+                          <button class="custom-btn" data-searchfield="Followup">Followup</button>
+                          <button class="custom-btn" data-searchfield="Prospects">Prospects</button>
+                          <button class="custom-btn" data-searchfield="Closed">Closed</button>
+                        </div>
+                        <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Course</h5>
+                            <button class="custom-btn" data-searchfield="Python Full Stack">Python Full Stack</button>
+                            <button class="custom-btn" data-searchfield="Data Science">Data Science</button>
+                            <button class="custom-btn" data-searchfield="Marketing">Marketing</button>
+                            <button class="custom-btn" data-searchfield="Spoken English">Spoken English</button>
+                          </div>
+                        <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Source</h5>
+                            <button class="custom-btn" data-searchfield="Naukri">Naukri</button>
+                          <button class="custom-btn" data-searchfield="Mail">Mail</button>
+                          <button class="custom-btn" data-searchfield="Whatsapp">Whatsapp</button>
+                          <button class="custom-btn" data-searchfield="Foundit">Foundit</button>
+                          <button class="custom-btn" data-searchfield="Indeed">Indeed</button>
+                          <button class="custom-btn" data-searchfield="Just Dial">Just Dial</button>
+                    </div>
+                    <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                      <h5 class="text-center">Employee</h5>
+                        <button class="custom-btn" data-searchfield="Pranav">Pranav</button>
+                        <button class="custom-btn" data-searchfield="Vivek">Vivek</button>
+                        <button class="custom-btn" data-searchfield="Naveen">Naveen</button>
+                </div>
+                <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                  <h5 class="text-center">Time</h5>
+                  <button class="custom-btn" data-searchfield="time">time</button>
+                  <button class="custom-btn" data-searchfield="today">today</button>
+
+                  <div class="dropdown" id="custom-date-div">
+                    <button class="custom-btn" data-bs-toggle="dropdown" aria-expanded="false" data-searchfield="Custom Date">
+                      Custom Date
+                    </button>
+                    <ul class="dropdown-menu" id="custom-date-dropdown">
+                      <li><button id="from-date-btn" onclick="addFromDate()">From</button><input type="date" id="from-date"></li>
+                      <li><button id="to-date-btn" onclick="addToDate()">To</button><input type="date" id="to-date"></li>
+                    </ul>
+                  </div>
+            </div>
+            <div class="col-xl-2 col-md-6 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+              <h5 class="text-center">Degree</h5>
+              <button class="custom-btn" data-searchfield="Qualification">Quaification</button>
+              <button class="custom-btn" data-searchfield="Percentage">Percentage</button>
+        </div>
+      </div>
+    </div>
+              </div>
+        </div>
+           <!-- Search criteria end -->
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item nav-profile dropdown d-none d-lg-block">
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="nav-profile-img">
+                    <img src="{% static 'assets/images/user.png' %}" alt="image">
+                    <!-- <span class="availability-status online"></span> -->
+                  </div>
+                </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="mdi mdi-bell-outline"></i>
+                    <span class="count-symbol"></span>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-lg-block full-screen-link">
+                  <a class="nav-link">
+                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                  </a>
+                </li>
+              <li class="nav-item d-none d-lg-block">
+                  <a class="nav-link" style="cursor: pointer;">
+                      <i class="mdi mdi-database" id="database-button"></i>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                  <a class="nav-link" style="cursor: pointer;">
+                      <i class="mdi mdi-calendar" id="calendar-button"></i>
+                  </a>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- Navbar end -->
+
+        <!-- Content -->
+        <div class="container-fluid page-body-wrapper">
+        <!-- dashboard side bar -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="{% static 'assets/images/user.png' %}" alt="profile">
+                  <span class="login-status online"></span>
+                  <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">{{user}}</span>
+                  <span class="text-secondary text-small">{{designation}}</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'adminstrator_home' %}">
+                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Leads</span>
+                <i class="mdi mdi-marker-check menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="{% url 'admin-page-clientleads' %}">Client</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'admin-page-customerleads' %}">Customer</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <span class="menu-title">Employees</span>
+                <i class="mdi mdi-city menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="" aria-expanded="false" aria-controls="activities">
+                <span class="menu-title">Activities</span>
+                <i class="mdi mdi-marker-check menu-icon"></i>
+              </a>
+              
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="" aria-expanded="false" aria-controls="activities">
+                <span class="menu-title">Merida Admin</span>
+                <i class="mdi mdi-marker-check menu-icon"></i>
+              </a>
+              
+            </li>
+          </ul>
+        </nav>
+        <!-- Dashboard side bar end -->
+
+        <!-- Content table start -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row m-2 mt-4">
+                    <div class="col-sm-12 col-lg-12 justify-content-between">
+                        <div class="row justify-content-center text-center">
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(54, 215, 232, 1);">
+                            <h6>New Leads</h6>
+                            <h6>{{new_leads_count}}</h6></div>
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(6, 185, 157, 1);">
+                            <h6>Followup Leads</h6>
+                            <h6>{{followup_count}}</h6></div>
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(255, 191, 150, 1);">
+                                <h6>Prospects</h6>
+                                <h6>{{prospect_count}}</h6>
+                            </div>
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(218, 140, 255, 1);">
+                                <h6>Registered</h6>
+                                <h6>{{registered_count}}</h6></div>
+                            <div class="col-xl-2 p-3 ms-2 rounded" style="background-color: rgba(255, 165, 0, 1);">
+                                <h6>Closed</h6>
+                                <h6>{{closed_count}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-7 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <h4 class="card-title float-left">Leads Chart by Course</h4>
+                          <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                        </div>
+                        <canvas id="visit-sale-chart" class="mt-4"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-5 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Leads Chart</h4>
+                        
+                        <canvas id="barChart" width="400px" height="350px"></canvas>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <h4 class="card-title float-left">Employee Comparision Chart</h4>
+                          <div id="Employee-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                        </div>
+                        <canvas id="Employee-chart" class="mt-4"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4>Leads Chart by Source</h4>
+                        <canvas id="barChart" width="400px" height="350px"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial -->
+          </div>
+        </div>
+    </div>
+    <script>
+      var ctx = document.getElementById('barChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels:{{ labels | safe }},
+                    datasets: [{ 
+                        data:{{ values | safe }},
+                        
+                        backgroundColor: [
+                        'rgba(255, 153, 0, 0.8)',
+    'rgba(26, 178, 255, 0.8)',
+    'rgba(255, 77, 77, 0.8)',
+    'rgba(0, 128, 255, 0.8)',
+    'rgba(153, 153, 102, 0.8)'
+    
+          ],
+          borderColor: [
+          'rgba(255, 153, 0, 0.8)',
+    'rgba(26, 178, 255, 0.8)',
+    'rgba(255, 77, 77, 0.8)',
+    'rgba(0, 128, 255, 0.8)',
+    'rgba(153, 153, 102, 0.8)',
+            'rgba(255, 159, 64, 1)'
+          ],
+                        borderWidth: 0.4
+                    }]
+                },
+                options: {
+                maintainAspectRatio: false,
+                responsive: false,
+                width: 100,
+                height: 100,
+                legend: {
+                  display: true,
+                  position: 'right', // Position of the legend (other options: 'top', 'left', 'bottom')
+              },
+                }
+            });
+    
+    
+    </script>
+    <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'assets/js/off-canvas.js' %}"></script>
+  <script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'assets/js/misc.js' %}"></script>
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+  <script src="{% static 'assets/js/todolist.js' %}"></script>
+  <script src="{% static 'assets/vendors/chart.js/Chart.min.js' %}"></script>
+  <!-- <script src="{% static 'assets/js/chart.js' %}"></script> -->
+  <!-- <script src="{% static 'js/hide.js' %}"></script>
+  <script src="{% static 'assets/js/' %}"></script> -->
+  <script src="{% static 'js/searchload.js' %}"></script>
+</body>
+</html>

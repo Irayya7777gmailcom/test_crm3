@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'css/newcustom.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- Nav bar -->
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" href=""><img src="{% static 'assets/images/merida_tech_minds_opc_pvt_ltd_cover-removebg-preview.png' %}" alt="logo" style="height: 60px;width: 200px;"/></a>
+                <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'assets/images/logo-mini.svg' %}" alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-stretch">
+              <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                <span class="mdi mdi-menu"></span>
+              </button>
+              <!-- Search Criteria -->
+              <div class="row ms-2 ">
+                <div class="col-md-12">
+                  <div class="row p-2 mt-2">
+                    <div class="col-md-12 p-2 rounded" id="clickableDiv" style="border: 1px solid lightgray;height: 40px;color: black;width: 550px;">
+                    <i class="mdi mdi-magnify" style="font-size: 18px;" onclick="send()"></i>
+                    </div>
+                   </div>
+  
+                   <div id="hiddenDiv">
+                    <div class="row justify-content-end"  style="background-color: white; color: black;border: 1px solid lightgray; border-bottom: none;">
+                      <button class="d-flex justify-content-center" style="width: 60px;border: none;" id="close-btn">Close</button>
+                     </div>
+    
+                     <div class="row p-0" id="subhiddendiv" style="background-color: white;border: 1px solid lightgray;">
+                          <div  class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                            <h5 class="text-center">Leads</h5>
+                            <button class="custom-btn" data-searchfield="lead Name" id="lead">lead Name</button>
+                            <button class="custom-btn" data-searchfield="Contact Number">Contact Number</button>
+                            <button class="custom-btn" data-searchfield="New Leads">New Leads</button>
+                            <button class="custom-btn" data-searchfield="Followup">Followup</button>
+                            <button class="custom-btn" data-searchfield="Prospects">Prospects</button>
+                            <button class="custom-btn" data-searchfield="Closed">Closed</button>
+                          </div>
+                          <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                            <h5 class="text-center">Course</h5>
+                              <button class="custom-btn" data-searchfield="Python Full Stack">Python Full Stack</button>
+                              <button class="custom-btn" data-searchfield="Data Science">Data Science</button>
+                              <button class="custom-btn" data-searchfield="Marketing">Marketing</button>
+                              <button class="custom-btn" data-searchfield="Spoken English">Spoken English</button>
+                            </div>
+                          <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                            <h5 class="text-center">Source</h5>
+                              <button class="custom-btn" data-searchfield="Naukri">Naukri</button>
+                            <button class="custom-btn" data-searchfield="Mail">Mail</button>
+                            <button class="custom-btn" data-searchfield="Whatsapp">Whatsapp</button>
+                            <button class="custom-btn" data-searchfield="Foundit">Foundit</button>
+                            <button class="custom-btn" data-searchfield="Indeed">Indeed</button>
+                            <button class="custom-btn" data-searchfield="Just Dial">Just Dial</button>
+                      </div>
+                      <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                        <h5 class="text-center">Employee</h5>
+                          <button class="custom-btn" data-searchfield="Pranav">Pranav</button>
+                          <button class="custom-btn" data-searchfield="Vivek">Vivek</button>
+                          <button class="custom-btn" data-searchfield="Naveen">Naveen</button>
+                  </div>
+                  <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                    <h5 class="text-center">Time</h5>
+                    <button class="custom-btn" data-searchfield="time">time</button>
+                    <button class="custom-btn" data-searchfield="today">today</button>
+  
+                    <div class="dropdown" id="custom-date-div">
+                      <button class="custom-btn" data-bs-toggle="dropdown" aria-expanded="false" data-searchfield="Custom Date">
+                        Custom Date
+                      </button>
+                      <ul class="dropdown-menu" id="custom-date-dropdown">
+                        <li><button id="from-date-btn" onclick="addFromDate()">From</button><input type="date" id="from-date"></li>
+                        <li><button id="to-date-btn" onclick="addToDate()">To</button><input type="date" id="to-date"></li>
+                      </ul>
+                    </div>
+              </div>
+              <div class="col-xl-2 col-md-6 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                <h5 class="text-center">Degree</h5>
+                <button class="custom-btn" data-searchfield="Qualification">Quaification</button>
+                <button class="custom-btn" data-searchfield="Percentage">Percentage</button>
+          </div>
+        </div>
+      </div>
+                </div>
+          </div>
+             <!-- Search criteria end -->
+              <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item nav-profile dropdown d-none d-lg-block">
+                  <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="nav-profile-img">
+                      <img src="{% static 'assets/images/user.png' }" alt="image">
+                    </div>
+                  </a>
+                  <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="{% url 'logout' %}">
+                      <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                      <i class="mdi mdi-bell-outline"></i>
+                      <span class="count-symbol"></span>
+                    </a>
+                  </li>
+                  <li class="nav-item d-none d-lg-block full-screen-link">
+                    <a class="nav-link">
+                      <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                    </a>
+                  </li>
+                <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link" style="cursor: pointer;">
+                        <i class="mdi mdi-database" id="database-button"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item d-none d-lg-block">
+                    <a class="nav-link" style="cursor: pointer;">
+                        <i class="mdi mdi-calendar" id="calendar-button"></i>
+                    </a>
+                  </li>
+              </ul>
+              <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+              </button>
+            </div>
+          </nav>
+        <!-- Navbar end -->
+
+        <!-- Content -->
+        <div class="container-fluid page-body-wrapper">
+        <!-- dashboard side bar -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+              <li class="nav-item nav-profile">
+                <a href="#" class="nav-link">
+                  <div class="nav-profile-image">
+                    <img src="{% static 'assets/images/user.png' %}" alt="profile">
+                    <span class="login-status online"></span>
+                    <!--change to offline or busy as needed-->
+                  </div>
+                  <div class="nav-profile-text d-flex flex-column">
+                    <span class="font-weight-bold mb-2">{{user}}</span>
+                    <span class="text-secondary text-small">{{designation}}</span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'manager-home' %}">
+                  <span class="menu-title">Dashboard</span>
+                  <i class="mdi mdi-home menu-icon"></i>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                  <span class="menu-title">Leads</span>
+                  <i class="mdi mdi-marker-check menu-icon"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                  <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'manager-page-clientleads' %}">Client</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'manager-page-customerleads' %}">Customer</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">
+                  <span class="menu-title">Activities</span>
+                  <i class="mdi mdi-marker-check menu-icon"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        <!-- Dashboard side bar end -->
+
+        <!-- Content table start -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row ps-3 mt-4 justify-content-center">
+                            <div class="activities_count col-md-1 p-3 ms-2 rounded">
+                            <button class="bg-info" id="call-btn" data-bs-toggle="modal" data-bs-target="#countModal">Call</button>
+                        </div>
+                            <div class="activities_count col-md-1 p-3 ms-2 rounded">
+                                <button class="bg-info" id="message-btn" data-bs-toggle="modal" data-bs-target="#countModal">Message</button>
+                            </div>
+                            <div class="activities_count col-md-1 p-3 ms-2 rounded" >
+                                <button class="bg-info" id="mail-btn" data-bs-toggle="modal" data-bs-target="#countModal">Mail</button>
+                        </div>
+                            <div class="activities_count col-md-1 p-3 ms-2 rounded" >
+                                <button class="bg-info" id="whatsapp-btn" data-bs-toggle="modal" data-bs-target="#countModal">Whatsapp</button>
+                        </div>
+                            <div class="activities_count col-md-1 p-3 ms-2 rounded">
+                                <button class="bg-info" id="counselling-btn" data-bs-toggle="modal" data-bs-target="#countModal">Counselling</button>
+                        </div>
+                            <div class="activities_count col-md-1 p-3 ms-2 rounded">
+                                <button class="bg-info" id="college-visit-btn" data-bs-toggle="modal" data-bs-target="#countModal">College Visit</button>
+                        </div>
+                             <div class="activities_count col-md-1 p-3 ms-2 rounded">
+                                <button class="bg-info" id="corporate-visit-btn" data-bs-toggle="modal" data-bs-target="#countModal">Corporate Visit</button>
+                        </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="clearfix">
+                          <h4 class="card-title float-left">Target Achieved Chart</h4>
+                          <div id="activities_chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                        </div>
+                        <canvas id="activities_chart" class="mt-4"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body" style="padding-top: 70px;">
+                        <h4>Today Activities</h4>
+                        <canvas id="today_activities" class="mt-4"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <div class="row">
+                <div class="col-md-5 grid-margin">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">Today Leads Chart</h4>
+                      <canvas id="traffic-chart"></canvas>
+                      <div id="traffic-chart-legend" class="rounded-legend legend-horizontal legend-bottom-left pt-4"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-7 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="clearfix">
+                        <h4 class="card-title float-left">Today Leads by Course</h4>
+                        <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+                      </div>
+                      <canvas id="visit-sale-chart" class="mt-4"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4>Today Leads by Source</h4>
+                      <canvas id="barChart" class="mt-4"></canvas>
+                    </div>
+                  </div>
+                </div>
+          <!-- content-wrapper ends -->
+          <!-- partial -->
+        </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial -->
+          </div>
+        </div>
+
+        <a href="#" class="btn btn-lg btn-info" id="back-to-top" onclick="scrollToTop()"><i class="mdi mdi-arrow-up"></i></a>
+    
+    <!-- Count Modal -->
+    <div class="modal" id="countModal" data-bs-backdrop="static">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body justify-content-center">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-6 upload-container">
+                <form action="{% url 'manager_activity_count' %}" method="POST">
+                  {% csrf_token %}
+                  <label for="leads_count" class="form-label">Enter The Count</label>
+                  <input type="number" name="leads_count" id="leads_count" class="form-control">
+                  <button type="submit" class="btn btn-sm btn-info mt-2">Submit</button>
+                </form>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Count Modal End -->
+      </div>
+
+    <script>
+      function scrollToTop() {
+        document.documentElement.scrollTop = 0;
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        var button = document.getElementById("back-to-top");
+
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            button.style.display = "block";
+        } else {
+            button.style.display = "none";
+        }
+    }
+</script>
+    <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'assets/js/off-canvas.js' %}"></script>
+  <script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'assets/js/misc.js' %}"></script>
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+  <script src="{% static 'assets/js/todolist.js' %}"></script>
+  <script src="{% static 'assets/vendors/chart.js/Chart.min.js'%}"></script>
+  <!-- <script src="{% static 'assets/js/chart.js' %}"></script> -->
+  <script src="{% static 'js/leadschartby_course.js' %}"></script>
+  <script src="{% static 'js/hide.js' %}"></script>
+  <script src="{% static 'js/searchload.js' %}"></script>
+  <script src="{% static 'js/activity_chart.js' %}"></script>
+  
+</body>
+
+</html>

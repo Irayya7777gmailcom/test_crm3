@@ -1,0 +1,51 @@
+#client_level{
+    display: none;
+  }
+  #customer_level{
+    display: none;
+  }
+  #client_other_source{
+    display: none;
+  }
+  #customer_other_source{
+    display: none;
+  }
+.priority-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.star {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.priority-stars {
+  color: #ddd;
+}
+
+.priority-stars .star.active {
+  color: #f39c12;
+}
+
+#cheque-payment{
+    display: none;
+  }
+#upi-payment{
+  display: none;
+}
+#DD-payment{
+  display: none;
+}
+#Bank-transfer{
+  display: none;
+}
+#cash-payment{
+  display: none;
+}
+.table tbody input{
+  border: none;
+  border-bottom: 1px solid lightgray;
+  outline: none;
+  width: 80px;
+}

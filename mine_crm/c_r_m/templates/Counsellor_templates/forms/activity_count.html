@@ -1,0 +1,167 @@
+<!-- Call Count -->
+<div class="modal" id="callcountModal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body justify-content-center">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 upload-container">
+              <form action="{% if call %}{% url 'councellor-activity-count' stage=call %}{% endif %}" method="POST">
+                {% csrf_token %}
+                <label for="leads_count" class="form-label">Enter The Call Count</label>
+                <input type="number" name="call_count" id="leads_count" class="form-control" >
+                <button type="submit" class="btn btn-sm btn-info mt-2">Submit</button>
+              </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Call Count end -->
+
+  <!-- Message Count -->
+  <div class="modal" id="messagecountModal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body justify-content-center">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 upload-container">
+              <form action="{% if message %}{% url 'councellor-activity-count' stage=message %}{% endif %}" method="POST">
+                {% csrf_token %}
+                <label for="leads_count" class="form-label">Enter The Message Count</label>
+                <input type="number" name="message_count" id="leads_count" class="form-control">
+                <button type="submit" class="btn btn-sm btn-info mt-2">Submit</button>
+              </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Message count end -->
+
+  <!-- Mail count -->
+  <div class="modal" id="mailcountModal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body justify-content-center">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 upload-container">
+              <form action="{% if mail %}{% url 'councellor-activity-count' stage=mail %}{% endif %}" method="POST">
+                {% csrf_token %}
+                <label for="leads_count" class="form-label">Enter The Mail Count</label>
+                <input type="number" name="mail_count" id="leads_count" class="form-control">
+                <button type="submit" class="btn btn-sm btn-info mt-2">Submit</button>
+              </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Mail count end -->
+
+  <!-- Whatsapp count -->
+  <div class="modal" id="whatsappcountModal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body justify-content-center">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 upload-container">
+              <form action="{% if whatsapp %}{% url 'councellor-activity-count' stage=whatsapp %}{% endif %}" method="POST">
+                {% csrf_token %}
+                <label for="leads_count" class="form-label">Enter The Whatsapp Count</label>
+                <input type="number" name="whatsapp_count" id="leads_count" class="form-control">
+                <button type="submit" class="btn btn-sm btn-info mt-2">Submit</button>
+              </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Whatsapp count end -->
+
+  <!-- Councelling -->
+  <div class="modal" id="councellingcountModal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body justify-content-center">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 upload-container">
+              <form action="{% if councelling %}{% url 'councellor-activity-count' stage=councelling %}{% endif %}" method="POST">
+                {% csrf_token %}
+                <label for="leads_count" class="form-label">Enter The Councelling Count</label>
+                <input type="number" name="councelling_count" id="leads_count" class="form-control">
+                <button type="submit" class="btn btn-sm btn-info mt-2">Submit</button>
+              </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Councelling end -->
+
+  <!-- College Visit -->
+  <div class="modal" id="collegevisitcountModal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body justify-content-center">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 upload-container">
+              <form action="{% if college_visit %}{% url 'councellor-activity-count' stage=college_visit %}{% endif %}" method="POST">
+                {% csrf_token %}
+                <label for="leads_count" class="form-label">Enter The College Visit Count</label>
+                <input type="number" name="college_visit_count" id="leads_count" class="form-control">
+                <button type="submit" class="btn btn-sm btn-info mt-2">Submit</button>
+              </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- College Visit end -->
+
+  <!-- Corporate Visit -->
+  <div class="modal" id="corporatevisitcountModal" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body justify-content-center">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-md-6 upload-container">
+              <form action="{% if corporate_visit %}{% url 'councellor-activity-count' stage=corporate_visit %}{% endif %}" method="POST">
+                {% csrf_token %}
+                <label for="leads_count" class="form-label">Enter The Corporate Visit Count</label>
+                <input type="number" name="corporate_visit_count" id="leads_count" class="form-control">
+                <button type="submit" class="btn btn-sm btn-info mt-2">Submit</button>
+              </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Corporate visit end -->

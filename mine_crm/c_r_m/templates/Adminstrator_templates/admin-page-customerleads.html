@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+    content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Administrator Customer Leads</title>
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/Filter.css' %}" rel="stylesheet">
+    <script src="{% static 'js/Filter.js' %}"></script>
+
+    <style>
+      
+      h6{
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+        .custom-btn{
+          background: none;
+          border: none;
+          margin-bottom: 5px;
+        }
+
+        #hiddenDiv{
+          display: none;
+        }
+        .custom-btn:hover{
+          font-weight: 600;
+        }
+        .clickable-div-btn{
+          background: none;
+          border: none;
+        }
+        #subhiddendiv{
+          max-height: 450px;
+          overflow-y: auto;
+        }
+        #custom-date-dropdown{
+            text-align: center;
+        }
+        #from-date-btn{
+          border: none;
+          background: none;
+        }
+        #to-date-btn{
+          border: none;
+          background: none;
+        }
+        #from-date{
+          width: 110px;
+        }
+        #to-date{
+          width: 110px;
+          margin-left: 20px;
+        }
+        #customerleads-btn{
+          background-color: lightgray;
+          color: black;
+          padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-scroller">
+        <!-- Nav bar -->
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+          <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+              <a class="navbar-brand brand-logo" href=""><img src="{% static 'assets/images/merida_tech_minds_opc_pvt_ltd_cover-removebg-preview.png' %}" alt="logo" style="height: 60px;width: 200px;"/></a>
+              <a class="navbar-brand brand-logo-mini" href=""><img src="{% static 'assets/images/logo-mini.svg' %}" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <!-- Search Criteria -->
+            <div class="row ms-2 ">
+              <div class="col-xl-12 col-sm-4">
+                <div class="row p-2 mt-2">
+                  <div class="col-12 p-2 rounded" id="clickableDiv" style="border: 1px solid lightgray;height: 40px;color: black; width: 550px;">
+                  <i class="mdi mdi-magnify" style="font-size: 18px;" onclick="send()"></i>
+                  </div>
+                 </div>
+
+                 <div id="hiddenDiv">
+                  <div class="row justify-content-end"  style="background-color: white; color: black;border: 1px solid lightgray; border-bottom: none;">
+                    <button class="d-flex justify-content-center" style="width: 60px;border: none;" id="close-btn">Close</button>
+                   </div>
+  
+                   <div class="row p-0" id="subhiddendiv" style="background-color: white;border: 1px solid lightgray;">
+                        <div  class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Leads</h5>
+                          <button class="custom-btn" data-searchfield="lead Name" id="lead">lead Name</button>
+                          <button class="custom-btn" data-searchfield="Contact Number">Contact Number</button>
+                          <button class="custom-btn" data-searchfield="New Leads">New Leads</button>
+                          <button class="custom-btn" data-searchfield="Followup">Followup</button>
+                          <button class="custom-btn" data-searchfield="Prospects">Prospects</button>
+                          <button class="custom-btn" data-searchfield="Closed">Closed</button>
+                        </div>
+                        <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Course</h5>
+                            <button class="custom-btn" data-searchfield="Python Full Stack">Python Full Stack</button>
+                            <button class="custom-btn" data-searchfield="Data Science">Data Science</button>
+                            <button class="custom-btn" data-searchfield="Marketing">Marketing</button>
+                            <button class="custom-btn" data-searchfield="Spoken English">Spoken English</button>
+                          </div>
+                        <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                          <h5 class="text-center">Source</h5>
+                            <button class="custom-btn" data-searchfield="Naukri">Naukri</button>
+                          <button class="custom-btn" data-searchfield="Mail">Mail</button>
+                          <button class="custom-btn" data-searchfield="Whatsapp">Whatsapp</button>
+                          <button class="custom-btn" data-searchfield="Foundit">Foundit</button>
+                          <button class="custom-btn" data-searchfield="Indeed">Indeed</button>
+                          <button class="custom-btn" data-searchfield="Just Dial">Just Dial</button>
+                    </div>
+                    <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                      <h5 class="text-center">Employee</h5>
+                        <button class="custom-btn" data-searchfield="Pranav">Pranav</button>
+                        <button class="custom-btn" data-searchfield="Vivek">Vivek</button>
+                        <button class="custom-btn" data-searchfield="Naveen">Naveen</button>
+                </div>
+                <div class="col-xl-2 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+                  <h5 class="text-center">Time</h5>
+                  <button class="custom-btn" data-searchfield="time">time</button>
+                  <button class="custom-btn" data-searchfield="today">today</button>
+
+                  <div class="dropdown" id="custom-date-div">
+                    <button class="custom-btn" data-bs-toggle="dropdown" aria-expanded="false" data-searchfield="Custom Date">
+                      Custom Date
+                    </button>
+                    <ul class="dropdown-menu" id="custom-date-dropdown">
+                      <li><button id="from-date-btn" onclick="addFromDate()">From</button><input type="date" id="from-date"></li>
+                      <li><button id="to-date-btn" onclick="addToDate()">To</button><input type="date" id="to-date"></li>
+                    </ul>
+                  </div>
+            </div>
+            <div class="col-xl-2 col-md-6 p-1 d-flex flex-column justify-content-center" style="border-right: 1px solid lightgray;">
+              <h5 class="text-center">Degree</h5>
+              <button class="custom-btn" data-searchfield="Qualification">Quaification</button>
+              <button class="custom-btn" data-searchfield="Percentage">Percentage</button>
+        </div>
+      </div>
+    </div>
+              </div>
+        </div>
+           <!-- Search criteria end -->
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item nav-profile dropdown d-none d-lg-block">
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="nav-profile-img">
+                    <img src="{% static 'assets/images/user.png' %}" alt="image">
+                    <!-- <span class="availability-status online"></span> -->
+                  </div>
+                </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                  <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                    <i class="mdi mdi-bell-outline"></i>
+                    <span class="count-symbol"></span>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-lg-block full-screen-link">
+                  <a class="nav-link">
+                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                  </a>
+                </li>
+                <li class="nav-item dropdown pt-4">
+                  <a class="nav-link dropdown-toggle" id="createRecordDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-account-plus"></i>
+                  </a>
+                  <ul class="dropdown-menu navbar-dropdown" aria-labelledby="createRecordDropdown">
+                      <li>
+                        <button class="dropdown-item justify-content-start" type="button" data-bs-toggle="modal" data-bs-target="#customerModal"><i class="mdi mdi-account-plus me-2"></i>Customer</button>
+                      </li>
+                      <li>
+                        <div class="dropdown-divider"></div>
+                        <p class="mt-2"><i class="mdi mdi-link-variant ms-3 me-2"></i>Upload Excel</p>
+                      <form class="px-2 py-0 dropdown-item">
+                        <div class="form-group">
+                          <input type="file" class="form-control">
+                          <button type="submit" class="btn btn-info btn-sm mt-1">Upload</button>
+                        </div>
+                      </form>
+                    </li>
+                    </ul>
+                </li>
+              <li class="nav-item d-none d-lg-block">
+                  <a class="nav-link" style="cursor: pointer;">
+                      <i class="mdi mdi-database" id="database-button"></i>
+                  </a>
+                </li>
+                <li class="nav-item d-none d-lg-block">
+                  <a class="nav-link" style="cursor: pointer;">
+                      <i class="mdi mdi-calendar" id="calendar-button"></i>
+                  </a>
+                </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- Navbar end -->
+
+        <!-- Content -->
+        <div class="container-fluid page-body-wrapper">
+        <!-- dashboard side bar -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li class="nav-item nav-profile">
+              <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                  <img src="{% static 'assets/images/user.png' %}" alt="profile">
+                  <span class="login-status online"></span>
+                  <!--change to offline or busy as needed-->
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                  <span class="font-weight-bold mb-2">{{user}}</span>
+                  <span class="text-secondary text-small">Designation</span>
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'adminstrator_home' %}">
+                <span class="menu-title">Dashboard</span>
+                <i class="mdi mdi-home menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Leads</span>
+                <i class="mdi mdi-marker-check menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="{% url 'admin-page-clientleads' %}">Client</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'admin-page-customerleads' %}">Customer</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <span class="menu-title">Employees</span>
+                <i class="mdi mdi-city menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#activities" aria-expanded="false" aria-controls="activities">
+                <span class="menu-title">Activities</span>
+                <i class="mdi mdi-marker-check menu-icon"></i>
+              </a>
+              <div class="collapse" id="activities">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="">Call</a></li>
+                  <li class="nav-item"><a class="nav-link" href="">Task</a></li>
+                  <li class="nav-item"><a class="nav-link" href="">Event</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <!-- Dashboard side bar end -->
+
+        <!-- Content table start -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+              <div class="row">
+                  <div class="dropdown">
+                      <button class="btn btn-outline-secondary dropdown-toggle ms-2 mt-4" type="button" id="customerleads-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                        Leads
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#" id="customernewleads-btn">New Leads</a></li>
+                        <li><a class="dropdown-item" href="#" id="customerfollowupleads-btn">Followup Leads</a></li>
+                        <li><a class="dropdown-item" href="#" id="customerprospects-btn">Prospects</a></li>
+                        <li><a class="dropdown-item" href="#" id="customerregistered-btn">Registered</a></li>
+                        <li><a class="dropdown-item" href="#" id="customerclosed-btn">Closed</a></li>
+                      </ul>
+                    </div>
+              </div>
+              <!-- Tables -->
+
+            <div class="LeadsTable row mt-4" id="customernewLeadsTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Click To Apply Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th></th>
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course Enquired" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th></th>
+                                    <th></th>
+                                    
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td><input type="checkbox"></td>
+                                  <td scope="row">1</td>
+                                  <td>John</td>
+                                  <td>6576879807</td>
+                                  <td>Python</td>
+                                  <td>Employee</td>
+                                  <td><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#followupModal">
+                                    Followup
+                                  </button></td>
+                                  <td> <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#closedModal">
+                                    Closed
+                                  </button></td>
+                                </tr>
+                                <tr>
+                                  <td><input type="checkbox"></td>
+                                  <td scope="row">1</td>
+                                  <td>John</td>
+                                  <td>6576879807</td>
+                                  <td>Python</td>
+                                  <td>Employees</td>
+                                  <td><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#followupModal">
+                                    Followup
+                                  </button></td>
+                                  <td> <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#closedModal">
+                                    Closed
+                                  </button></td>
+                                </tr>
+                                <tr>
+                                  <td><input type="checkbox"></td>
+                                  <td scope="row">1</td>
+                                  <td>John</td>
+                                  <td>6576879866</td>
+                                  <td>Python</td>
+                                  <td>Employee</td>
+                                  <td><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#followupModal">
+                                    Followup
+                                  </button></td>
+                                  <td> <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#closedModal">
+                                    Closed
+                                  </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+          
+                        
+                    </div>
+                  </div>
+              </div>
+                  </div>
+            </div>
+            <div class="LeadsTable row mt-4" id="customerfollowupLeadsTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Click To Apply Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th></th>
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course Enquired" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Purpose of Calling" disabled></th>
+                                    <th></th>
+                                    
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td><input type="checkbox"></td>
+                                  <td scope="row">1</td>
+                                  <td>John</td>
+                                  <td>6576879807</td>
+                                  <td>Python</td>
+                                  <td>Employee</td>
+                                  <td>Course</td>
+                                  <td><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#prospectsModal">
+                                    Prospects
+                                  </button></td>
+                                  <td> <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#closedModal">
+                                    Closed
+                                  </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+              </div>
+            </div>
+            <div class="LeadsTable row mt-4" id="customerprospectsTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Click To Apply Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th></th>
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Preffered Course" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Expected Reg Date" disabled></th>
+                                  
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td><input type="checkbox"></td>
+                                  <td scope="row">1</td>
+                                  <td>John</td>
+                                  <td>6576879807</td>
+                                  <td>Python</td>
+                                  <td>Employee</td>
+                                  <td>Course</td>
+                                  <td> <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#closedModal">
+                                    Closed
+                                  </button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            </div>
+            <div class="LeadsTable row mt-4" id="customerregisteredTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Click To Apply Filter</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th></th>
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course Enquired" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course" disabled></th>
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td><input type="checkbox"></td>
+                                  <td scope="row">1</td>
+                                  <td>John</td>
+                                  <td>6576879807</td>
+                                  <td>Python</td>
+                                  <td>Employee</td>
+                                  <td>Course</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            </div>
+            <div class="LeadsTable row mt-4" id="customerclosedTable">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="panel panel-primary filterable">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">
+                <button class="btn btn-default btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="mdi mdi-filter"></i>Closed</button>
+              </h3>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <tr class="filters">
+                                    <th></th>
+                                    <th><input type="text" class="form-control" placeholder="Lead Id" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Mobile No" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Course Enquired" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Level of Lead" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Stage of Closure" disabled></th>
+                                    <th><input type="text" class="form-control" placeholder="Reason of Closure" disabled></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                  <td><input type="checkbox"></td>
+                                  <td scope="row">1</td>
+                                  <td>John</td>
+                                  <td>6576879807</td>
+                                  <td>Python</td>
+                                  <td>Employee</td>
+                                  <td>Course</td>
+                                  <td>aaaa</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div>
+              </div>
+                  </div>
+            </div>
+              <!-- Tables end -->
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial -->
+        </div>
+        </div>
+
+<!-- Prospects Modal -->
+<div class="modal" id="prospectsModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header mx-4">
+        <h4 class="modal-title">Prospects Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 ">
+                <form class="row g-3 bg-light" style="border: 1px solid lightgray;">
+                    <div class="col-md-8">
+                        <input type="date" id="Tentative Batch Start Date" name="Tentative Batch Start Date" class="form-control" placeholder="Walk-in Date">
+                        <label for="Tentative Batch Start Date" name="Tentative Batch Start Date">Tentative Batch Start Date</label>
+                      </div>
+                    <div class="col-md-6">
+                        <input type="time" id="Preferred Batch Start Time" name="Preferred Batch Start Time" class="form-control" placeholder="Walk-in Time">
+                        <label for="Preferred Batch Start Time" name="Preferred Batch Start Time">Preferred Batch Start Time</label>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="time" id="Preferred Batch End Time" name="Preferred Batch End Time" class="form-control" placeholder="Walk-in Time">
+                        <label for="Preferred Batch End Time" name="Preferred Batch End Time">Preferred Batch End Time</label>
+                      </div>
+                      <div class="col-12">
+                        <textarea class="form-control" placeholder="Summary" id="summary" name="summary" style="height: 100px"></textarea>
+                        <label for="summary">Remarks</label>
+                    </div>
+                      <div class="col-md-6">
+                        <select id="batch-type" name="batch-type" class="form-select">
+                            <option selected>select...</option>
+                            <option value="">Weekdays</option>
+                            <option value="">Weekend</option>
+                            </Select>
+                            <label for="batch-type">Preferred Batch Type</label>
+                      </div>
+                      <div class="col-md-6">
+                        <select id="Preferred Class Type" name="Preferred Class Type" class="form-select">
+                            <option selected>select...</option>
+                            <option value="">Online</option>
+                            <option value="">Offline</option>
+                            <option value="">Hybrid</option>
+                            </Select>
+                            <label for="Preferred Class Type">Preferred Class Type</label>
+                      </div>
+                      <div class="col-6">
+                        <input type="text" id="Preferred Course" name="Preferred Course" class="form-control">
+                        <label for="Preferred Course">Preferred Course</label>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="date" id="Expected Registration Date" name="Expected Registration Date" class="form-control" >
+                        <label for="Expected Registration Date" name="Expected Registration Date">Expected Registration Date</label>
+                      </div>
+                      <div class="col-md-4">
+                        <input type="text" id="Billing Value" name="Billing Value" class="form-control" >
+                        <label for="Billing Value" name="Billing Value">Billing Value</label>
+                      </div>
+                      <div class="col-4">
+                        <input type="text" id="Expected Collection" name="Expected Collection" class="form-control" >
+                        <label for="Expected Collection" name="Expected Collection">Expected Collection</label>
+                      </div>
+                      <div class="col-md-4">
+                        <select id="Mode_of_Payment" name="Mode_of_Payment" class="form-select">
+                            <option selected>select...</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Cheque">Cheque</option>
+                            <option value="Bank Transfer">Bank Transfer</option>
+                            <option value="UPI">UPI</option>
+                            </Select>
+                            <label for="Mode_of_Payment">Mode of Payment</label>
+                      </div>
+                  </form>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" value="Register" ></button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Prospects Modal end -->
+
+<!-- Followup modal start -->
+<div class="modal" id="followupModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Followup Registration Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <form class="row g-3 bg-light" style="border: 1px solid lightgray;">
+                    <div class="col-md-4">
+                        <input type="text" id="lead_id" name="lead_id" class="form-control">
+                        <label for="lead_id">Lead Id</label>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" id="purpose_of_calling" name="purpose_of_calling" class="form-control" placeholder="Purpose of calling" onclick="load_lead_id()">
+                        <label for="purpose_of_calling">Purpose of Calling</label>
+                    </div>
+                    <div class="col-md-10">
+                      <input type="date" id="followup_date" name="followup_date" class="form-control" placeholder="Walk-in Date">
+                      <label for="followup_date" name="followup_date">FollowUp Date</label>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control" placeholder="Summary" id="summary" name="summary" style="height: 100px"></textarea>
+                        <label for="summary">Remarks</label>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="date" id="walkin_date" name="walkin_date" class="form-control" placeholder="Walk-in Date">
+                        <label for="walkin_date" name="followup_date">Expected Walk-in Date</label>
+                      </div>
+                    <div class="col-md-12">
+                        <input type="time" id="walkin_time" name="walkin_time" class="form-control" placeholder="Walk-in Time">
+                        <label for="walkin_time" name="followup_date">Expected Walk-in Time</label>
+                      </div>
+                      <div class="col-md-12">
+                        <label for="star_rating">Priorirty</label>
+                    <div class="star-rating">
+                        <span class="fa fa-star" data-rating="1"></span>
+                        <span class="fa fa-star" data-rating="2"></span>
+                        <span class="fa fa-star" data-rating="3"></span>
+                        <span class="fa fa-star" data-rating="4"></span>
+                        <span class="fa fa-star" data-rating="5"></span>
+                    </div>
+
+                    <input type="hidden" name="priority" id="priority" value="0">
+                    <label for="need_supervisor_attention">Need Supervisor Attention</label>
+                       <input type="checkbox" id="need_supervisor_attention" name="need_supervisor_attention" value="yes">
+                       <input type="hidden" name="user_id" id="followupmodal_user_id" value={{user_id}}>				
+                       <input type="hidden" name="model_name" id="followupmodal_model_name" value={{model_name}}>
+                       <input type="text" name="lead_id" id="followupmodal_lead_id" value="">
+                      </div>
+                  </form>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Followup modal end -->
+
+<!-- Closed modal start -->
+<div class="modal" id="closedModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Closed Registration Form</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <form class="row g-3 bg-light" style="border: 1px solid lightgray;">
+                    <div class="col-md-6">
+                        <input type="text" id="lead_id" name="lead_id" class="form-control">
+                        <label for="lead_id">Lead Id</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="closure-stage" name="closure-stage" class="form-control">
+                        <label for="closure-stage">Stage of Closure</label>
+                    </div>
+                    <div class="col-md-12">
+                        <textarea class="form-control" placeholder="History" id="history" name="history" style="height: 100px"></textarea>
+                    <label for="summary">History</label>
+                    </div>
+                    <div class="col-md-12">
+                        <textarea class="form-control" placeholder="Reason for Closure" id="reason" name="reason" style="height: 100px"></textarea>
+                <label for="reason-for-closure">Reason for Closure</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="assigned-to" name="assigned-to" class="form-control">
+                        <label for="assigned-to">Assigned To</label>
+                    </div>
+                    <div class="col-12">
+                        <label>Opportunities in future</label>
+            <input type="radio" name="opportunities_in_future" id="opportunities_in_future_yes" value="yes">
+            <label for="opportunities_in_future_yes">Yes</label>
+            <input type="radio" name="opportunities_in_future" id="opportunities_in_future_no" value="no">
+            <label for="opportunities_in_future_no">No</label>
+                    </div>
+                  </form>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- Closed modal end -->
+
+
+    </div>
+
+    <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'assets/js/off-canvas.js' %}"></script>
+  <script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'assets/js/misc.js' %}"></script>
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+  <script src="{% static 'assets/js/todolist.js' %}"></script>
+  <script src="{% static 'assets/vendors/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/js/chart.js' %}"></script>
+  <script src="{% static 'js/customer-hide.js' %}"></script>
+  <script src="{% static 'js/searchload.js' %}"></script>
+</body>
+</html>
